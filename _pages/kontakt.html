@@ -1,0 +1,109 @@
+---
+title: "Kontakt"
+seo_title: "Kontakt & Offerte | Schweizer Umzüge"
+description: "Kostenlose und unverbindliche Offerte für Ihren Umzug anfragen. Schnelle Rückmeldung, klare Prozesse und direkter Kontakt per Telefon oder E-Mail."
+permalink: /kontakt/
+body_class: "contact-page"
+---
+{% assign meta = site.data.site %}
+{% assign biz = meta.business %}
+{% assign page_data = meta.contact_page %}
+
+<section class="page-hero page-hero--narrow">
+  <div class="site-shell site-shell--narrow">
+    <p class="eyebrow" data-reveal>{{ page_data.hero_eyebrow }}</p>
+    <h1 class="page-hero__title" data-reveal>{{ page_data.hero_title }}</h1>
+    <p class="page-hero__text" data-reveal>{{ page_data.hero_text }}</p>
+    <p class="lead" data-reveal>{{ page_data.hero_note }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="site-shell site-shell--narrow">
+    <div class="section__head section__head--center">
+      <h2 data-reveal>{{ page_data.form_title }}</h2>
+      <p data-reveal>{{ page_data.form_text }}</p>
+    </div>
+    <div data-reveal>
+      {% include offerte-form.html id_prefix="kontakt" context="kontaktseite" %}
+    </div>
+  </div>
+</section>
+
+<section class="stats" aria-labelledby="kontakt-proof-title">
+  <div class="site-shell">
+    <h2 class="visually-hidden" id="kontakt-proof-title">{{ page_data.trust_title }}</h2>
+    <div class="stats__grid">
+      {% for stat in meta.stats %}
+        <div class="stats__item" data-reveal>
+          <div class="stats__value">
+            <span>{{ stat.value }}</span>
+            {% if stat.unit != blank %}
+              <span class="stats__unit">{{ stat.unit }}</span>
+            {% endif %}
+          </div>
+          <p class="stats__label">{{ stat.label }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="site-shell">
+    <div class="section__head section__head--center">
+      <h2 data-reveal>{{ page_data.alt_title }}</h2>
+    </div>
+
+    <div class="contact-alt">
+      <article class="card contact-alt__card" data-reveal>
+        <h3>{{ page_data.phone_title }}</h3>
+        <p>{{ page_data.phone_text }}</p>
+        <a class="contact-alt__value" href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a>
+      </article>
+
+      <article class="card contact-alt__card" data-reveal>
+        <h3>{{ page_data.email_title }}</h3>
+        <p>{{ page_data.email_text }}</p>
+        <a class="contact-alt__value" href="mailto:{{ biz.email }}">{{ biz.email }}</a>
+        <p class="muted">{{ biz.street }}, {{ biz.city }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq">
+  <div class="site-shell faq">
+    <div class="faq__intro">
+      <p class="eyebrow" data-reveal>FAQ</p>
+      <h2 data-reveal>{{ page_data.faq_title }}</h2>
+    </div>
+
+    <div class="faq__list">
+      {% for item in meta.contact_faq %}
+        <details class="faq__item" data-reveal{% if forloop.first %} open{% endif %}>
+          <summary class="faq__summary">
+            <span>{{ item.question }}</span>
+            <span class="faq__icon" aria-hidden="true">+</span>
+          </summary>
+          <div class="faq__content">
+            <p>{{ item.answer }}</p>
+          </div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="site-shell site-shell--narrow">
+    <div class="card card--centered" data-reveal>
+      <h2>{{ page_data.cta_title }}</h2>
+      <p class="lead">{{ page_data.cta_text }}</p>
+      <div class="button-row">
+        <a class="button button--primary" href="#kontakt-name">Kostenlose Offerte anfragen</a>
+        <a class="button button--secondary" href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a>
+      </div>
+    </div>
+  </div>
+</section>

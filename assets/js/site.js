@@ -28,6 +28,7 @@
     if (!navPanel || !navToggle) return;
     navPanel.classList.add('is-open');
     doc.classList.add('has-nav-open');
+    if (header) header.classList.add('is-nav-open');
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Navigation schliessen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation schliessen';
@@ -37,6 +38,7 @@
     if (!navPanel || !navToggle) return;
     navPanel.classList.remove('is-open');
     doc.classList.remove('has-nav-open');
+    if (header) header.classList.remove('is-nav-open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Navigation öffnen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation öffnen';
@@ -122,4 +124,179 @@
       target.focus({ preventScroll: true });
     });
   });
+
+  const parseEmail = (value) => {
+    const trimmed = (value || '').trim();
+    if (!trimmed) return '';
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) ? trimmed : null;
+  };
+
+  const parsePhone = (value) => {
+    const trimmed = (value || '').trim();
+    if (!trimmed) return '';
+    const normalized = trimmed.replace(/[^\d+]/g, '');
+    return normalized.length >= 6 ? trimmed : null;
+  };
+
+  const submitFormsparkPayload = (endpoint, payload) => {
+    const formData = new URLSearchParams();
+    Object.keys(payload).forEach((key) => {
+      if (payload[key] !== '') {
+        formData.append(key, payload[key]);
+      }
+    });
+
+    return fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: formData.toString(),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error('Formspark request failed');
+      }
+      return response.text();
+    });
+  };
+
+  const refreshFormGuard = (form) => {
+    form.setAttribute('data-form-started-at', String(Date.now()));
+  };
+
+  const getHoneypotValue = (form) => {
+    const field = form.querySelector("input[name='_honeypot']");
+    return field ? (field.value || '').trim() : '';
+  };
+
+  const isFormSubmittedTooFast = (form) => {
+    const startedAt = parseInt(form.getAttribute('data-form-started-at') || '', 10);
+    const minSubmitMs = parseInt(form.getAttribute('data-form-min-submit-ms') || '', 10);
+
+    if (Number.isNaN(startedAt) || Number.isNaN(minSubmitMs)) {
+      return false;
+    }
+
+    return Date.now() - startedAt < minSubmitMs;
+  };
+
+  const initOfferForms = () => {
+    const forms = document.querySelectorAll('[data-offer-form]');
+    if (!forms.length) return;
+
+    forms.forEach((form) => {
+      refreshFormGuard(form);
+      const endpoint = form.getAttribute('data-form-endpoint') || '';
+      const status = form.querySelector('[data-form-status]');
+      const success = form.querySelector('[data-form-success]');
+      const submitButton = form.querySelector("button[type='submit']");
+      const defaultLabel = submitButton ? submitButton.getAttribute('data-submit-label') || submitButton.textContent.trim() : '';
+      const defaultButtonHtml = submitButton ? submitButton.innerHTML : '';
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const nameInput = form.querySelector("input[name='name']");
+        const phoneInput = form.querySelector("input[name='phone']");
+        const emailInput = form.querySelector("input[name='email']");
+        const privacyInput = form.querySelector("input[name='privacy_accepted']");
+        const nameError = form.querySelector("[data-error-for='name']");
+        const phoneError = form.querySelector("[data-error-for='phone']");
+        const emailError = form.querySelector("[data-error-for='email']");
+        const privacyError = form.querySelector("[data-error-for='privacy_accepted']");
+        const parsedName = (nameInput?.value || '').trim();
+        const parsedPhone = parsePhone(phoneInput?.value || '');
+        const parsedEmail = parseEmail(emailInput?.value || '');
+        let hasError = false;
+
+        [nameError, phoneError, emailError, privacyError].forEach((el) => {
+          if (el) el.textContent = '';
+        });
+        [nameInput, phoneInput, emailInput].forEach((el) => {
+          if (el) el.classList.remove('is-invalid');
+        });
+        if (success) success.hidden = true;
+        if (status) status.textContent = '';
+
+        if (getHoneypotValue(form)) {
+          form.reset();
+          refreshFormGuard(form);
+          if (success) success.hidden = false;
+          return;
+        }
+
+        if (isFormSubmittedTooFast(form)) {
+          if (status) status.textContent = 'Bitte versuche es in einem Moment erneut.';
+          return;
+        }
+
+        if (!parsedName) {
+          if (nameInput) nameInput.classList.add('is-invalid');
+          if (nameError) nameError.textContent = 'Bitte geben Sie Ihren Namen ein.';
+          hasError = true;
+        }
+
+        if (parsedPhone === null) {
+          if (phoneInput) phoneInput.classList.add('is-invalid');
+          if (phoneError) phoneError.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein.';
+          hasError = true;
+        }
+
+        if (!parsedEmail) {
+          if (emailInput) emailInput.classList.add('is-invalid');
+          if (emailError) emailError.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+          hasError = true;
+        }
+
+        if (!privacyInput?.checked) {
+          if (privacyError) privacyError.textContent = 'Bitte akzeptieren Sie die Datenschutzerklärung.';
+          hasError = true;
+        }
+
+        if (hasError || !submitButton || !endpoint) {
+          return;
+        }
+
+        const payload = {};
+        new FormData(form).forEach((value, key) => {
+          if (key !== '_honeypot') {
+            payload[key] = typeof value === 'string' ? value.trim() : value;
+          }
+        });
+        payload.submittedAt = new Date().toISOString();
+
+        submitButton.disabled = true;
+        submitButton.classList.remove('is-success', 'is-error');
+        submitButton.classList.add('is-loading');
+        if (status) status.textContent = 'Wird verarbeitet...';
+
+        submitFormsparkPayload(endpoint, payload)
+          .then(() => {
+            form.reset();
+            refreshFormGuard(form);
+            if (status) status.textContent = '';
+            if (success) success.hidden = false;
+            submitButton.classList.remove('is-loading');
+            submitButton.classList.add('is-success');
+            submitButton.textContent = 'Anfrage gesendet';
+            window.setTimeout(() => {
+              submitButton.classList.remove('is-success');
+              submitButton.innerHTML = defaultButtonHtml;
+            }, 1800);
+          })
+          .catch(() => {
+            submitButton.classList.remove('is-loading');
+            submitButton.classList.add('is-error');
+            submitButton.innerHTML = defaultButtonHtml;
+            if (status) status.textContent = 'Gerade gab es ein Problem. Bitte versuchen Sie es erneut.';
+          })
+          .finally(() => {
+            submitButton.disabled = false;
+          });
+      });
+    });
+  };
+
+  initOfferForms();
 })();

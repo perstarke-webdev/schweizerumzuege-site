@@ -1,0 +1,37 @@
+---
+title: "Impressum"
+seo_title: "Impressum | Schweizer Umzüge"
+description: "Rechtliche Angaben und Kontaktdaten von Schweizer Umzüge."
+permalink: /impressum/
+body_class: "legal-page"
+---
+{% assign biz = site.data.site.business %}
+
+<section class="page-hero page-hero--narrow">
+  <div class="site-shell site-shell--narrow">
+    <p class="eyebrow" data-reveal>Rechtliches</p>
+    <h1 class="page-hero__title" data-reveal>Impressum</h1>
+    <p class="page-hero__text" data-reveal>Rechtliche Angaben und Ansprechpartner von Schweizer Umzüge.</p>
+  </div>
+</section>
+
+<article class="post-content">
+  <p><strong>Firmenname:</strong> Schweizer-Umzüge</p>
+  <p><strong>Rechtsform:</strong> GmbH</p>
+  <p><strong>Handelsregistereintrag:</strong> Handelsregister Bern, CH-036.4.055.936-2</p>
+  <p><strong>Sitz der Gesellschaft:</strong> {{ biz.street }}, {{ biz.city }}, Schweiz</p>
+  <p><strong>Geschäftsführer:</strong> Sedat Krasniqi</p>
+
+  <h2>Kontakt</h2>
+  <ul>
+    <li>Telefon: {{ biz.phone }}</li>
+    <li>E-Mail: {{ biz.email }}</li>
+    <li>Website: <a href="{{ site.url }}">{{ site.url }}</a></li>
+  </ul>
+
+  <p><strong>Umsatzsteuer-Identifikationsnummer:</strong> CH-036.4.055.936-2</p>
+  <p><strong>Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV:</strong> Sedat Krasniqi</p>
+  <p><strong>Haftungshinweis:</strong> Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+  <p><strong>Urheberrecht:</strong> Die durch die Seitenbetreiber erstellten Inhalte und Werke auf dieser Website unterliegen dem Urheberrecht. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p>
+  <p><strong>Datenschutz:</strong> Weitere Informationen zum Datenschutz finden Sie in unserer <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a>.</p>
+</article>

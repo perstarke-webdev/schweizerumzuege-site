@@ -1,0 +1,122 @@
+---
+title: "Über uns"
+seo_title: "Über uns | Schweizer Umzüge"
+description: "Schweizer Umzüge steht für strukturierte Planung, zuverlässige Durchführung und transparente Angebote für Privat- und Geschäftsumzüge."
+permalink: /ueber-uns/
+body_class: "about-page"
+---
+{% assign meta = site.data.site %}
+{% assign biz = meta.business %}
+{% assign page_data = meta.about_page %}
+
+<section class="page-hero">
+  <div class="site-shell page-hero__grid">
+    <div>
+      <p class="eyebrow" data-reveal>{{ page_data.hero_eyebrow }}</p>
+      <h1 class="page-hero__title" data-reveal>{{ page_data.hero_title }}</h1>
+      <p class="page-hero__text" data-reveal>{{ page_data.hero_text }}</p>
+      <div class="page-hero__ctas" data-reveal>
+        <a class="button button--primary" href="{{ meta.cta.primary_url | relative_url }}">{{ meta.cta.primary_label }}</a>
+        <a class="button button--secondary" href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a>
+      </div>
+    </div>
+
+    <div class="page-hero__visual" data-reveal>
+      <img src="{{ '/assets/images/home/hero.webp' | relative_url }}" alt="Team von Schweizer Umzüge bei einem laufenden Umzug." width="1080" height="1920" loading="eager" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="site-shell site-shell--narrow">
+    <div class="section__head section__head--center">
+      <h2 data-reveal>{{ page_data.intro_title }}</h2>
+      <p class="lead" data-reveal>{{ page_data.intro_text }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft">
+  <div class="site-shell split">
+    <div>
+      <p class="eyebrow" data-reveal>Unser Anspruch</p>
+      <h2 data-reveal>{{ page_data.mission_title }}</h2>
+      <p class="lead" data-reveal>{{ page_data.mission_text }}</p>
+    </div>
+
+    <div class="split__visual" data-reveal>
+      <img src="{{ '/assets/images/services/private.webp' | relative_url }}" alt="Vorbereiteter Umzugswagen mit sauber gestapelten Kartons." width="1024" height="682" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="site-shell">
+    <div class="section__head section__head--center">
+      <h2 data-reveal>{{ page_data.values_title }}</h2>
+    </div>
+
+    <div class="services-grid">
+      {% for value in meta.values %}
+        <article class="card" data-reveal>
+          <h3 class="card__title">{{ value.title }}</h3>
+          <p class="card__text">{{ value.text }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper">
+  <div class="site-shell split">
+    <div>
+      <h2 data-reveal>{{ page_data.work_title }}</h2>
+      <p class="lead" data-reveal>{{ page_data.work_text }}</p>
+    </div>
+
+    <div class="split__values">
+      {% for point in page_data.work_points %}
+        <article class="split__value" data-reveal>
+          <h3>{{ point }}</h3>
+          <p>Jeder Schritt wird so organisiert, dass Aufwand reduziert und Zuverlässigkeit im Ablauf erhöht wird.</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="stats" aria-labelledby="proof-title">
+  <div class="site-shell">
+    <div class="section__head section__head--center section--tight">
+      <h2 class="visually-hidden" id="proof-title">{{ page_data.proof_title }}</h2>
+    </div>
+    <div class="stats__grid">
+      {% for stat in meta.stats %}
+        <div class="stats__item" data-reveal>
+          <div class="stats__value">
+            <span>{{ stat.value }}</span>
+            {% if stat.unit != blank %}
+              <span class="stats__unit">{{ stat.unit }}</span>
+            {% endif %}
+          </div>
+          <p class="stats__label">{{ stat.label }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="site-shell split split--left-img">
+    <div>
+      <h2 data-reveal>{{ page_data.insights_title }}</h2>
+      <p class="lead" data-reveal>{{ page_data.insights_text }}</p>
+    </div>
+
+    <div class="split__visual" data-reveal>
+      <img src="{{ '/assets/images/services/business.webp' | relative_url }}" alt="Echte Einblicke in die tägliche Arbeit von Schweizer Umzüge." width="1024" height="683" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+{% include closing-cta.html eyebrow=page_data.cta_eyebrow title=page_data.cta_title text=page_data.cta_text %}

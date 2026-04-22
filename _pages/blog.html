@@ -1,0 +1,42 @@
+---
+title: "Blog"
+seo_title: "Blog | Schweizer Umzüge"
+description: "Tipps, Wissen und Orientierung rund um Planung, Ablauf, Kosten und weitere Themen für Ihren Umzug in der Schweiz."
+permalink: /blog/
+body_class: "blog-page"
+---
+{% assign meta = site.data.site %}
+{% assign page_data = meta.blog_page %}
+
+<section class="page-hero page-hero--narrow">
+  <div class="site-shell site-shell--narrow">
+    <p class="eyebrow" data-reveal>{{ page_data.hero_eyebrow }}</p>
+    <h1 class="page-hero__title" data-reveal>{{ page_data.hero_title }}</h1>
+    <p class="page-hero__text" data-reveal>{{ page_data.hero_text }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="site-shell">
+    <div class="blog-grid">
+      {% for post in site.posts %}
+        <article class="post-card" data-reveal>
+          <a class="post-card__image" href="{{ post.url | relative_url }}">
+            <img src="{{ post.image | relative_url }}" alt="{{ post.image_alt | default: post.title }}" width="1200" height="675" loading="lazy" decoding="async">
+          </a>
+          <div class="post-card__body">
+            <p class="post-card__date">{{ post.date | date: "%d.%m.%Y" }}</p>
+            <h2 class="post-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+            <p class="post-card__excerpt">{{ post.excerpt | strip_html | strip }}</p>
+            <a class="post-card__cta" href="{{ post.url | relative_url }}">
+              <span>Beitrag lesen</span>
+              <span aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
+            </a>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include closing-cta.html eyebrow="Jetzt anfragen" title=page_data.cta_title text=page_data.cta_text %}

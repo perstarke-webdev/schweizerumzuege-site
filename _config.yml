@@ -3,11 +3,12 @@ lang: "de-CH"
 title: "Schweizer Umzüge"
 description: "Professionelle Umzugsdienstleistungen in Bern, Basel und Zürich. Transparent, zuverlässig und strukturiert — für Privatpersonen und Unternehmen."
 url: "https://schweizerumzuege.ch"
+production_url: "https://schweizerumzuege.ch"
 baseurl: ""
 repository: "schweizerumzuege-site"
 timezone: Europe/Zurich
-logo: "/assets/images/logo.svg"
-og_image: "/assets/images/social/og-image.png"
+logo: "/assets/images/logo.png"
+og_image: "/assets/images/social/og-image.jpg"
 noindex_site: true
 
 formspark_endpoint: "https://submit-form.com/qmOOtdX2O"
@@ -25,7 +26,6 @@ exclude:
   - vendor
   - node_modules
   - Gemfile.lock
-  - README.md
   - .tmp-validation
   - docker-compose.yml
 

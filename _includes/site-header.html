@@ -1,9 +1,10 @@
 {% assign navigation = site.data.navigation.items %}
 {% assign biz = site.data.site.business %}
+{% assign cta = site.data.site.cta %}
 <header class="site-header" data-site-header>
   <div class="site-shell site-header__inner">
     <a class="site-header__brand" href="{{ '/' | relative_url }}" aria-label="Schweizer Umzüge — Startseite">
-      <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="" width="180" height="58" />
+      <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="" width="216" height="92" />
       <span class="visually-hidden">Schweizer Umzüge</span>
     </a>
 
@@ -30,8 +31,8 @@
           </span>
           <span>{{ biz.phone }}</span>
         </a>
-        <a class="button button--primary button--sm" href="{{ '/kontakt/' | relative_url }}">
-          Kostenlose Offerte
+        <a class="button button--primary button--sm" href="{{ cta.primary_url | relative_url }}">
+          {{ cta.primary_label }}
           <span class="button__arrow" aria-hidden="true">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </span>

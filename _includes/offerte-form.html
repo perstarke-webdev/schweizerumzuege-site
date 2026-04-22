@@ -1,0 +1,82 @@
+{% assign form_id = include.id_prefix | default: "offerte" %}
+
+<form class="form" data-offer-form data-form-endpoint="{{ site.formspark_endpoint }}" data-form-context="{{ include.context | default: 'kontakt' }}" data-form-min-submit-ms="1800" novalidate>
+  <input type="hidden" name="source" value="{{ include.context | default: 'kontakt' }}">
+  <div class="visually-hidden" aria-hidden="true">
+    <label for="{{ form_id }}-company">Bitte dieses Feld leer lassen</label>
+    <input id="{{ form_id }}-company" name="_honeypot" type="text" tabindex="-1" autocomplete="off">
+  </div>
+
+  <p class="form__section-head">Basisdaten</p>
+  <div class="form__row form__row--2">
+    <div class="form__field">
+      <label for="{{ form_id }}-name">Name</label>
+      <input id="{{ form_id }}-name" name="name" type="text" autocomplete="name" required aria-describedby="{{ form_id }}-name-error">
+      <p class="form__error" id="{{ form_id }}-name-error" data-error-for="name"></p>
+    </div>
+
+    <div class="form__field">
+      <label for="{{ form_id }}-phone">Telefonnummer <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="{{ form_id }}-phone-error">
+      <p class="form__error" id="{{ form_id }}-phone-error" data-error-for="phone"></p>
+    </div>
+  </div>
+
+  <div class="form__field">
+    <label for="{{ form_id }}-email">E-Mail</label>
+    <input id="{{ form_id }}-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="{{ form_id }}-email-error">
+    <p class="form__error" id="{{ form_id }}-email-error" data-error-for="email"></p>
+  </div>
+
+  <p class="form__section-head">Umzugsdetails <span class="optional">(optional)</span></p>
+  <div class="form__row form__row--2">
+    <div class="form__field">
+      <label for="{{ form_id }}-date">Umzugsdatum <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-date" name="move_date" type="date">
+    </div>
+
+    <div class="form__field">
+      <label for="{{ form_id }}-size">Wohnungsgröße oder kurze Beschreibung <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-size" name="move_size" type="text" autocomplete="off">
+    </div>
+  </div>
+
+  <div class="form__row form__row--2">
+    <div class="form__field">
+      <label for="{{ form_id }}-from">Von <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-from" name="move_from" type="text" autocomplete="street-address">
+    </div>
+
+    <div class="form__field">
+      <label for="{{ form_id }}-to">Nach <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-to" name="move_to" type="text" autocomplete="street-address">
+    </div>
+  </div>
+
+  <p class="form__section-head">Zusatz <span class="optional">(optional)</span></p>
+  <div class="form__field">
+    <label for="{{ form_id }}-message">Nachricht <span class="optional">(optional)</span></label>
+    <textarea id="{{ form_id }}-message" name="message" rows="6"></textarea>
+  </div>
+
+  <label class="form__checkbox" for="{{ form_id }}-privacy">
+    <input id="{{ form_id }}-privacy" name="privacy_accepted" type="checkbox" value="yes" required aria-describedby="{{ form_id }}-privacy-error">
+    <span>Ich akzeptiere die <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a>.</span>
+  </label>
+  <p class="form__error" id="{{ form_id }}-privacy-error" data-error-for="privacy_accepted"></p>
+
+  <button class="button button--primary button--lg form__submit" type="submit" data-submit-label="Kostenlose Offerte anfragen">
+    Kostenlose Offerte anfragen
+    <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
+  </button>
+
+  <ul class="form__micro" aria-label="Formularvorteile">
+    <li>Kostenlos und unverbindlich</li>
+    <li>Keine versteckten Kosten</li>
+    <li>Schnelle Rückmeldung</li>
+  </ul>
+
+  <p class="form__hint">Wir melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.</p>
+  <p class="form__status" aria-live="polite" data-form-status></p>
+  <p class="form__success" hidden data-form-success>{{ site.data.site.contact_page.form_success }}</p>
+</form>
