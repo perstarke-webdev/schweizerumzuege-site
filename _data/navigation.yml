@@ -1,0 +1,9 @@
+items:
+  - label: "Dienstleistungen"
+    url: "/dienstleistungen/"
+  - label: "Über uns"
+    url: "/ueber-uns/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Kontakt"
+    url: "/kontakt/"

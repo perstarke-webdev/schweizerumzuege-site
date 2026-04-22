@@ -1,0 +1,59 @@
+locale: "de-CH"
+lang: "de-CH"
+title: "Schweizer Umzüge"
+description: "Professionelle Umzugsdienstleistungen in Bern, Basel und Zürich. Transparent, zuverlässig und strukturiert — für Privatpersonen und Unternehmen."
+url: "https://schweizerumzuege.ch"
+baseurl: ""
+repository: "schweizerumzuege-site"
+timezone: Europe/Zurich
+logo: "/assets/images/logo.svg"
+og_image: "/assets/images/social/og-image.png"
+noindex_site: true
+
+formspark_endpoint: "https://submit-form.com/qmOOtdX2O"
+
+include:
+  - _pages
+
+exclude:
+  - briefing
+  - Briefing
+  - _site
+  - .jekyll-cache
+  - .sass-cache
+  - .bundle
+  - vendor
+  - node_modules
+  - Gemfile.lock
+  - README.md
+  - .tmp-validation
+  - docker-compose.yml
+
+markdown: kramdown
+highlighter: rouge
+permalink: /blog/:slug/
+
+kramdown:
+  input: GFM
+  hard_wrap: false
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-seo-tag
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

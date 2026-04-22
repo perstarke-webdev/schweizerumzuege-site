@@ -1,0 +1,141 @@
+seo_title: "Schweizer Umzüge | Zuverlässige Umzüge in Bern, Basel und Zürich"
+description: "Professionelle Umzugsdienstleistungen für Privatpersonen und Unternehmen — transparente Preise, strukturierte Abläufe und ein Team, das wirklich anpackt. Aktiv in Bern, Basel und Zürich."
+
+business:
+  name: "Schweizer Umzüge"
+  phone: "031 351 61 62"
+  phone_tel: "+41313516162"
+  email: "info@schweizerumzuege.ch"
+  street: "Kasparstrasse 15"
+  city: "3027 Bern"
+  hours: "Mo–Sa: 7:00–19:00"
+
+cta:
+  primary_label: "Kostenlose Offerte anfragen"
+  primary_url: "/kontakt/"
+  secondary_label: "031 351 61 62"
+
+stats:
+  - value: "20"
+    unit: "Jahre"
+    label: "Erfahrung im Umzugsbereich"
+  - value: "300+"
+    unit: ""
+    label: "Umzüge pro Jahr"
+  - value: "50 000"
+    unit: "m²"
+    label: "Möbellagerung"
+  - value: "100%"
+    unit: ""
+    label: "Zertifiziert in Qualität & Umwelt"
+
+services:
+  - slug: "privatumzuege"
+    icon: "home"
+    title: "Privatumzüge"
+    short: "Professionelle Unterstützung für Ihren Wohnungswechsel, organisiert und passend zu Ihrem Bedarf."
+    long: "Ein Wohnungswechsel bringt viele Aufgaben mit sich. Schweizer Umzüge unterstützt Sie mit klarer Planung, zuverlässiger Durchführung und einer Lösung, die zu Ihrem Bedarf passt."
+    detail: "Komplette Unterstützung für Ihren Wohnungswechsel, organisiert und individuell abgestimmt."
+    bullets: ["Individuelle Planung", "Flexible Leistungen", "Strukturierter Ablauf"]
+    cta_label: "Offerte für Privatumzug anfragen"
+    image: "/assets/images/services/private.webp"
+  - slug: "geschaeftsumzuege"
+    icon: "building"
+    title: "Geschäftsumzüge"
+    short: "Effiziente Umzugslösungen für Unternehmen und Büros."
+    long: "Ein Büroumzug erfordert präzise Organisation. Schweizer Umzüge sorgt dafür, dass Ihr Umzug effizient durchgeführt wird und Abläufe möglichst wenig gestört werden."
+    detail: "Effiziente Lösungen für Unternehmen und Büros, mit klarer Planung und minimaler Unterbrechung."
+    bullets: ["Klare Planung", "Effiziente Umsetzung", "Strukturierter Ablauf"]
+    cta_label: "Offerte für Geschäftsumzug anfragen"
+    image: "/assets/images/services/business.webp"
+  - slug: "reinigung"
+    icon: "spray"
+    title: "Reinigung"
+    short: "Professionelle Reinigung rund um den Umzug."
+    long: "Reinigungsleistungen können direkt in den Umzug integriert werden. So entsteht ein klarer und nahtloser Ablauf ohne zusätzliche Koordination."
+    detail: "Professionelle Reinigung als Teil Ihres Umzugs, abgestimmt auf Ihre Anforderungen."
+    bullets: ["Einfache Integration", "Abgestimmte Leistungen", "Zuverlässige Durchführung"]
+    cta_label: "Reinigung anfragen"
+    image: "/assets/images/process/care.webp"
+  - slug: "raeumung"
+    icon: "box"
+    title: "Räumung"
+    short: "Strukturierte Unterstützung bei Räumungen."
+    long: "Bei Räumungen unterstützt Schweizer Umzüge mit einer strukturierten und zuverlässigen Durchführung, abgestimmt auf Ihre Situation."
+    detail: "Zuverlässige Räumung von Wohnungen, Häusern und Geschäftsräumen."
+    bullets: ["Klare Organisation", "Zuverlässige Umsetzung", "Strukturierter Ablauf"]
+    cta_label: "Räumung anfragen"
+    image: "/assets/images/impressions/apartment.webp"
+  - slug: "lagerung"
+    icon: "warehouse"
+    title: "Lagerung"
+    short: "Flexible Lagerungslösungen für Möbel und Gegenstände."
+    long: "Für Möbel und Gegenstände stehen flexible Lagerlösungen zur Verfügung, die kurz- oder langfristig genutzt werden können."
+    detail: "Flexible Lagerungslösungen für Möbel und Gegenstände, kurz- oder langfristig."
+    bullets: ["Flexible Nutzung", "Sichere Lagerung", "Einfache Organisation"]
+    cta_label: "Lagerung anfragen"
+    image: "/assets/images/services/storage.webp"
+  - slug: "umzugsplanung"
+    icon: "clipboard"
+    title: "Umzugsplanung"
+    short: "Klare Planung und Koordination für einen reibungslosen Ablauf."
+    long: "Eine gute Planung ist die Grundlage für einen erfolgreichen Umzug. Schweizer Umzüge sorgt für einen klaren Ablauf und eine koordinierte Umsetzung."
+    detail: "Strukturierte Planung und Koordination für einen reibungslosen Ablauf."
+    bullets: ["Strukturierte Planung", "Klare Kommunikation", "Abgestimmter Ablauf"]
+    cta_label: "Planung starten"
+    image: "/assets/images/services/planning.webp"
+
+process:
+  - num: "01"
+    title: "Anfrage"
+    text: "Sie senden Ihre Anfrage für eine kostenlose und unverbindliche Offerte."
+  - num: "02"
+    title: "Beratung"
+    text: "Ein Berater klärt Ihren Bedarf und organisiert bei Bedarf einen Termin vor Ort."
+  - num: "03"
+    title: "Umzug"
+    text: "Der Umzug wird zum vereinbarten Termin durchgeführt."
+  - num: "04"
+    title: "Abschluss"
+    text: "Ihr Feedback hilft, den Service weiter zu verbessern."
+
+advantages:
+  - title: "Erfahren"
+    text: "Langjährige Erfahrung im Umzugsbereich."
+  - title: "Strukturiert"
+    text: "Klare Prozesse und Abläufe."
+  - title: "Transparent"
+    text: "Nachvollziehbare Angebote."
+  - title: "Flexibel"
+    text: "Anpassbar an Ihren Bedarf."
+
+regions:
+  - name: "Bern"
+    text: "Umzugsservice in und rund um Bern"
+  - name: "Basel"
+    text: "Umzugsservice in und rund um Basel"
+  - name: "Zürich"
+    text: "Umzugsservice in und rund um Zürich"
+
+testimonials:
+  - text: "Rasche Rückmeldung, speditiv, pünktlich, freundlich, sehr zu empfehlen."
+    name: "Nicole Rohrer"
+    role: "Privatkundin"
+  - text: "Sehr zufrieden mit dem Service und dem reibungslosen Ablauf."
+    name: "Nicole P."
+    role: "Privatkundin"
+
+values:
+  - title: "Kundenzufriedenheit"
+    text: "Wir setzen alles daran, Erwartungen zu erfüllen und ein positives Umzugserlebnis zu schaffen."
+  - title: "Transparente Preise"
+    text: "Klare Angebote ohne versteckte Kosten."
+  - title: "Zuverlässigkeit"
+    text: "Pünktliche und strukturierte Umsetzung."
+
+developer:
+  label: "Made by PSWD"
+  url: "https://perstarke-webdev.de/"
+
+footer:
+  tagline: "Ihr zuverlässiger Partner für stressfreie Umzüge in der gesamten Schweiz. Überlassen Sie uns die Details Ihres Umzugs — und erleben Sie einen wirklich nahtlosen Übergang."

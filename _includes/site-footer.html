@@ -1,0 +1,57 @@
+{% assign meta = site.data.site %}
+{% assign biz = meta.business %}
+<footer class="site-footer">
+  <div class="site-shell">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="site-footer__logo" href="{{ '/' | relative_url }}" aria-label="Schweizer Umzüge — Startseite">
+          <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Schweizer Umzüge" width="200" height="64" />
+        </a>
+        <p class="site-footer__tagline">{{ meta.footer.tagline }}</p>
+      </div>
+
+      <nav class="site-footer__col" aria-label="Navigation">
+        <h4 class="site-footer__heading">Navigation</h4>
+        <ul>
+          <li><a href="{{ '/' | relative_url }}">Start</a></li>
+          <li><a href="{{ '/dienstleistungen/' | relative_url }}">Dienstleistungen</a></li>
+          <li><a href="{{ '/ueber-uns/' | relative_url }}">Über uns</a></li>
+          <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+          <li><a href="{{ '/kontakt/' | relative_url }}">Kontakt</a></li>
+          <li><a href="{{ '/kontakt/' | relative_url }}">Offerte erhalten</a></li>
+        </ul>
+      </nav>
+
+      <nav class="site-footer__col" aria-label="Leistungen">
+        <h4 class="site-footer__heading">Leistungen</h4>
+        <ul>
+          {% for s in meta.services %}
+            <li><a href="{{ '/dienstleistungen/#' | append: s.slug | relative_url }}">{{ s.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <div class="site-footer__col">
+        <h4 class="site-footer__heading">Kontakt</h4>
+        <ul class="site-footer__contact">
+          <li><a href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a></li>
+          <li><a href="mailto:{{ biz.email }}">{{ biz.email }}</a></li>
+          <li>{{ biz.street }}, {{ biz.city }}</li>
+          <li>{{ biz.hours }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bottom">
+      <p class="site-footer__copy">© {{ 'now' | date: '%Y' }} {{ site.title }} — Alle Rechte vorbehalten.</p>
+      <nav class="site-footer__legal" aria-label="Rechtliches">
+        <a href="{{ '/agb/' | relative_url }}">AGB</a>
+        <a href="{{ '/datenschutz/' | relative_url }}">Datenschutz</a>
+        <a href="{{ '/impressum/' | relative_url }}">Impressum</a>
+      </nav>
+      <a class="site-footer__badge" href="{{ meta.developer.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ meta.developer.label }} — zur Website">
+        <span class="site-footer__badge-core">{{ meta.developer.label }}</span>
+      </a>
+    </div>
+  </div>
+</footer>

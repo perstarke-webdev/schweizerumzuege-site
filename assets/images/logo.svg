@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 72" role="img" aria-label="Schweizer Umzüge.ch — Umzug, Transport, Lagerung">
+  <title>Schweizer Umzüge.ch</title>
+  <style>
+    .b{fill:#e01a1a;}
+    .w{fill:#ffffff;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:900;letter-spacing:0.01em;}
+    .t{fill:#14171c;font-family:'Inter','Helvetica Neue',Arial,sans-serif;font-weight:700;letter-spacing:0.22em;}
+  </style>
+  <rect class="b" x="0" y="0" width="220" height="50" rx="4"/>
+  <text class="w" x="110" y="23" font-size="18" text-anchor="middle">SCHWEIZER</text>
+  <text class="w" x="110" y="43" font-size="18" text-anchor="middle">UMZÜGE.CH</text>
+  <text class="t" x="110" y="64" font-size="8" text-anchor="middle">UMZUG · TRANSPORT · LAGERUNG</text>
+</svg>

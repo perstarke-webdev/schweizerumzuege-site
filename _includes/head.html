@@ -1,0 +1,58 @@
+{% assign meta = site.data.site %}
+{% assign biz = meta.business %}
+{% assign page_title = page.seo_title | default: page.title | default: meta.seo_title %}
+{% if page.title and page.title != meta.seo_title %}
+  {% assign page_title = page.seo_title | default: page.title %}
+  {% assign page_title = page_title | append: " | " | append: site.title %}
+{% endif %}
+{% assign meta_description = page.description | default: meta.description | default: site.description %}
+{% assign canonical_url = page.url | replace:'index.html','' | absolute_url %}
+{% assign og_image = page.og_image | default: site.og_image %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ page_title }}</title>
+<meta name="description" content="{{ meta_description }}">
+{% if site.noindex_site %}<meta name="robots" content="noindex, nofollow">{% endif %}
+<link rel="canonical" href="{{ canonical_url }}">
+<link rel="icon" href="{{ '/favicon.svg' | relative_url }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ '/favicon.svg' | relative_url }}">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="{{ site.locale }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{{ page_title }}">
+<meta property="og:description" content="{{ meta_description }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ og_image | absolute_url }}">
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:title" content="{{ page_title }}">
+<meta property="twitter:description" content="{{ meta_description }}">
+<meta property="twitter:image" content="{{ og_image | absolute_url }}">
+<link rel="preconnect" href="https://rsms.me" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"></noscript>
+<script>document.documentElement.classList.add('has-js');</script>
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MovingCompany",
+  "name": {{ site.title | jsonify }},
+  "description": {{ meta.description | jsonify }},
+  "url": {{ site.url | append: site.baseurl | jsonify }},
+  "telephone": {{ biz.phone_tel | jsonify }},
+  "email": {{ biz.email | jsonify }},
+  "image": {{ og_image | absolute_url | jsonify }},
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": {{ biz.street | jsonify }},
+    "postalCode": "3027",
+    "addressLocality": "Bern",
+    "addressCountry": "CH"
+  },
+  "areaServed": ["Bern", "Basel", "Zürich"],
+  "openingHours": "Mo-Sa 07:00-19:00"
+}
+</script>
