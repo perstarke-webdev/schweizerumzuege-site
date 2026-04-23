@@ -935,23 +935,89 @@ h4 { font-size: 1.125rem; letter-spacing: 0; font-weight: 600; }
 /* =============================================================
    Impressions (gallery)
    ============================================================= */
+.impressions-gallery {
+  display: grid;
+  gap: 1rem;
+}
+
+.impressions__controls {
+  display: none;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+.has-js .impressions__controls { display: flex; }
+
+.impressions__nav {
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-line-strong);
+  background: linear-gradient(180deg, var(--color-surface), var(--color-paper));
+  color: var(--color-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+.impressions__nav span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-0.05em);
+}
+.impressions__nav:hover,
+.impressions__nav:focus-visible {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+.impressions__nav:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+  background: linear-gradient(180deg, var(--color-surface), var(--color-paper));
+  color: var(--color-graphite);
+  border-color: var(--color-line);
+  box-shadow: var(--shadow-xs);
+}
+
 .impressions {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 1rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
 }
-@media (min-width: 720px) {
-  .impressions { grid-template-columns: repeat(12, 1fr); gap: 1rem; grid-auto-rows: 160px; }
-  .impressions__item:nth-child(1) { grid-column: span 6; grid-row: span 2; }
-  .impressions__item:nth-child(2) { grid-column: span 6; grid-row: span 1; }
-  .impressions__item:nth-child(3) { grid-column: span 3; grid-row: span 1; }
-  .impressions__item:nth-child(4) { grid-column: span 3; grid-row: span 1; }
-  .impressions__item:nth-child(5) { grid-column: span 6; grid-row: span 1; }
+.impressions::-webkit-scrollbar { display: none; }
+@media (min-width: 860px) {
+  .impressions { grid-auto-columns: calc((100% - 1rem) / 2); }
 }
 .impressions__item {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin: 0;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--color-paper-soft);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-sm);
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+.impressions__trigger {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .impressions__item img {
   width: 100%;
@@ -959,7 +1025,133 @@ h4 { font-size: 1.125rem; letter-spacing: 0; font-weight: 600; }
   object-fit: cover;
   transition: transform 1000ms var(--ease-out);
 }
-.impressions__item:hover img { transform: scale(1.04); }
+.impressions__hint {
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-88);
+  color: var(--color-ink);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(0.35rem);
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+.impressions__item:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-line-strong);
+  box-shadow: var(--shadow-md);
+}
+.impressions__item:hover img,
+.impressions__trigger:focus-visible img { transform: scale(1.03); }
+.impressions__item:hover .impressions__hint,
+.impressions__trigger:focus-visible .impressions__hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+.impressions__trigger:focus-visible {
+  outline: none;
+}
+
+.gallery-lightbox {
+  width: min(92vw, 72rem);
+  max-width: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-surface);
+}
+.gallery-lightbox::backdrop {
+  background: rgba(10, 12, 16, 0.82);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.gallery-lightbox__frame {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+.gallery-lightbox__figure {
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+.gallery-lightbox__figure img {
+  width: 100%;
+  max-height: min(78vh, 52rem);
+  border-radius: var(--radius-xl);
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.04);
+}
+.gallery-lightbox__figure figcaption {
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--color-surface-84);
+}
+.gallery-lightbox__close,
+.gallery-lightbox__nav {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-surface-24);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.gallery-lightbox__close:hover,
+.gallery-lightbox__close:focus-visible,
+.gallery-lightbox__nav:hover,
+.gallery-lightbox__nav:focus-visible {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-color: var(--color-surface);
+}
+.gallery-lightbox__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  font-size: 1.6rem;
+  line-height: 1;
+  box-shadow: var(--shadow-sm);
+}
+.gallery-lightbox__nav span {
+  font-size: 1.8rem;
+  line-height: 1;
+  transform: translateY(-0.06em);
+}
+
+@media (max-width: 700px) {
+  .gallery-lightbox {
+    width: min(94vw, 38rem);
+  }
+  .gallery-lightbox__frame {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+  .gallery-lightbox__close {
+    top: 0.65rem;
+    right: 0.65rem;
+  }
+  .gallery-lightbox__nav {
+    position: absolute;
+    top: calc(50% - 1.5rem);
+    z-index: 2;
+  }
+  .gallery-lightbox__nav--prev { left: 0.65rem; }
+  .gallery-lightbox__nav--next { right: 0.65rem; }
+}
 
 /* =============================================================
    About / split layout
