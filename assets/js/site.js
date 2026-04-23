@@ -296,6 +296,11 @@
     if (!track || slides.length < 1) return;
 
     let activeIndex = 0;
+    let trackIndex = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let suppressSlideClick = false;
+    let suppressClickTimer = 0;
 
     const getTrackGap = () => {
       const styles = window.getComputedStyle(track);
@@ -303,21 +308,33 @@
       return Number.isNaN(gap) ? 0 : gap;
     };
 
-    const getTrackStep = () => track.clientWidth + getTrackGap();
+    const getVisibleCount = () => (window.matchMedia('(min-width: 860px)').matches ? 2 : 1);
+
+    const getMaxTrackIndex = () => Math.max(0, slides.length - getVisibleCount());
 
     const updateTrackControls = () => {
       if (!prevButton || !nextButton) return;
 
-      const maxScrollLeft = Math.max(0, track.scrollWidth - track.clientWidth - 2);
-      prevButton.disabled = track.scrollLeft <= 2;
-      nextButton.disabled = track.scrollLeft >= maxScrollLeft;
+      const maxTrackIndex = getMaxTrackIndex();
+      prevButton.disabled = trackIndex <= 0;
+      nextButton.disabled = trackIndex >= maxTrackIndex;
+    };
+
+    const updateTrackPosition = () => {
+      const slideWidth = slides[0]?.getBoundingClientRect().width || 0;
+      const offset = (slideWidth + getTrackGap()) * trackIndex;
+
+      track.style.setProperty('--gallery-translate', `${offset * -1}px`);
+      updateTrackControls();
+    };
+
+    const setTrackIndex = (nextIndex) => {
+      trackIndex = Math.min(Math.max(nextIndex, 0), getMaxTrackIndex());
+      updateTrackPosition();
     };
 
     const scrollTrack = (direction) => {
-      track.scrollBy({
-        left: getTrackStep() * direction,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth',
-      });
+      setTrackIndex(trackIndex + direction * getVisibleCount());
     };
 
     const setLightboxSlide = (index) => {
@@ -346,6 +363,12 @@
 
     slides.forEach((slide, index) => {
       slide.addEventListener('click', (event) => {
+        if (suppressSlideClick) {
+          event.preventDefault();
+          suppressSlideClick = false;
+          return;
+        }
+
         if (!lightbox || typeof lightbox.showModal !== 'function') return;
         event.preventDefault();
         openLightbox(index);
@@ -364,7 +387,6 @@
       });
     }
 
-    track.addEventListener('scroll', updateTrackControls, { passive: true });
     track.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
@@ -377,8 +399,51 @@
       }
     });
 
-    window.addEventListener('resize', updateTrackControls);
-    updateTrackControls();
+    track.addEventListener('touchstart', (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (event) => {
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+
+      if (Math.abs(deltaX) < 44 || Math.abs(deltaX) <= Math.abs(deltaY)) {
+        return;
+      }
+
+      if (suppressClickTimer) {
+        window.clearTimeout(suppressClickTimer);
+      }
+
+      suppressSlideClick = true;
+      suppressClickTimer = window.setTimeout(() => {
+        suppressSlideClick = false;
+        suppressClickTimer = 0;
+      }, 240);
+      scrollTrack(deltaX > 0 ? -1 : 1);
+    }, { passive: true });
+
+    track.addEventListener('touchcancel', () => {
+      touchStartX = 0;
+      touchStartY = 0;
+      if (suppressClickTimer) {
+        window.clearTimeout(suppressClickTimer);
+        suppressClickTimer = 0;
+      }
+      suppressSlideClick = false;
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      setTrackIndex(trackIndex);
+    });
+    updateTrackPosition();
 
     if (!lightbox) return;
 
