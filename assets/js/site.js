@@ -278,6 +278,136 @@
     });
   };
 
+  const initFaqMotion = () => {
+    const faqItems = document.querySelectorAll('.faq__item');
+    if (!faqItems.length || prefersReducedMotion || typeof HTMLElement.prototype.animate !== 'function') {
+      return;
+    }
+
+    const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+    faqItems.forEach((item) => {
+      const summary = item.querySelector('.faq__summary');
+      const content = item.querySelector('.faq__content');
+      if (!summary || !content) return;
+
+      let heightAnimation = null;
+      let contentAnimation = null;
+      let isClosing = false;
+
+      const clearContentStyles = () => {
+        content.style.opacity = '';
+        content.style.transform = '';
+      };
+
+      const cleanup = () => {
+        item.style.height = '';
+        item.style.overflow = '';
+        item.classList.remove('is-animating');
+        clearContentStyles();
+        heightAnimation = null;
+        contentAnimation = null;
+        isClosing = false;
+      };
+
+      const animateContent = (opening) => {
+        if (contentAnimation) {
+          contentAnimation.cancel();
+        }
+
+        contentAnimation = content.animate(
+          opening
+            ? [
+              { opacity: 0, transform: 'translate3d(0, -0.35rem, 0)' },
+              { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+            ]
+            : [
+              { opacity: 1, transform: 'translate3d(0, 0, 0)' },
+              { opacity: 0, transform: 'translate3d(0, -0.25rem, 0)' },
+            ],
+          {
+            duration: opening ? 220 : 160,
+            easing,
+            fill: 'both',
+          }
+        );
+      };
+
+      const onAnimationFinish = (openState) => {
+        item.open = openState;
+        cleanup();
+      };
+
+      const shrink = () => {
+        isClosing = true;
+        item.classList.add('is-animating');
+        item.style.overflow = 'hidden';
+
+        const startHeight = `${item.offsetHeight}px`;
+        const endHeight = `${summary.offsetHeight}px`;
+
+        item.style.height = startHeight;
+
+        if (heightAnimation) {
+          heightAnimation.cancel();
+        }
+
+        animateContent(false);
+        heightAnimation = item.animate(
+          { height: [startHeight, endHeight] },
+          {
+            duration: 260,
+            easing,
+            fill: 'forwards',
+          }
+        );
+
+        heightAnimation.onfinish = () => onAnimationFinish(false);
+        heightAnimation.oncancel = () => {
+          isClosing = false;
+        };
+      };
+
+      const expand = () => {
+        item.classList.add('is-animating');
+        item.style.overflow = 'hidden';
+
+        const startHeight = `${item.offsetHeight}px`;
+        item.open = true;
+        const endHeight = `${item.offsetHeight}px`;
+
+        item.style.height = startHeight;
+
+        if (heightAnimation) {
+          heightAnimation.cancel();
+        }
+
+        animateContent(true);
+        heightAnimation = item.animate(
+          { height: [startHeight, endHeight] },
+          {
+            duration: 320,
+            easing,
+            fill: 'forwards',
+          }
+        );
+
+        heightAnimation.onfinish = () => onAnimationFinish(true);
+      };
+
+      summary.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        if (isClosing || !item.open) {
+          expand();
+          return;
+        }
+
+        shrink();
+      });
+    });
+  };
+
   const initGallery = () => {
     const gallery = document.querySelector('[data-gallery]');
     if (!gallery) return;
@@ -658,6 +788,7 @@
   };
 
   initCookieBanner();
+  initFaqMotion();
   initGallery();
   initOfferForms();
 })();
