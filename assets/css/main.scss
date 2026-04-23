@@ -62,7 +62,24 @@
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url("../fonts/source-sans-3-var.woff2") format("woff2");
+  src: url("../fonts/source-sans-3-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF,
+    U+0131,
+    U+0152-0153,
+    U+02BB-02BC,
+    U+02C6,
+    U+02DA,
+    U+02DC,
+    U+2000-206F,
+    U+20AC,
+    U+2122,
+    U+2191,
+    U+2193,
+    U+2212,
+    U+2215,
+    U+FEFF,
+    U+FFFD;
 }
 
 :root {
@@ -564,6 +581,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   position: sticky;
   top: 0;
   z-index: 40;
+  isolation: isolate;
   background: var(--color-surface-88);
   border-bottom: 1px solid transparent;
   backdrop-filter: blur(12px);
@@ -597,6 +615,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   width: auto;
   height: 2.85rem;
   display: block;
+  mix-blend-mode: darken;
 }
 .site-header__brand:hover { opacity: 0.85; }
 

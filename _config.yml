@@ -7,7 +7,7 @@ production_url: "https://schweizerumzuege.ch"
 baseurl: ""
 repository: "schweizerumzuege-site"
 timezone: Europe/Zurich
-logo: "/assets/images/logo.png"
+logo: "/assets/images/logo.webp"
 og_image: "/assets/images/social/og-image.jpg"
 noindex_site: true
 

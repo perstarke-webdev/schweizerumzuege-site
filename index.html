@@ -33,7 +33,7 @@ body_class: "home-page"
 
     <div class="hero__visual" data-reveal>
       <div class="hero__image">
-        <img src="{{ '/assets/images/home/hero.webp' | relative_url }}" alt="Umzugsteam von Schweizer Umzüge trägt eine Umzugskiste in eine Wohnung." width="1080" height="1920" fetchpriority="high" decoding="async">
+        <img src="{{ '/assets/images/home/hero-480.webp' | relative_url }}" srcset="{{ '/assets/images/home/hero-480.webp' | relative_url }} 480w, {{ '/assets/images/home/hero-800.webp' | relative_url }} 800w, {{ '/assets/images/home/hero.webp' | relative_url }} 1080w" sizes="(max-width: 919px) calc(100vw - 2rem), (max-width: 1279px) 44vw, 520px" alt="Umzugsteam von Schweizer Umzüge trägt eine Umzugskiste in eine Wohnung." width="1080" height="1920" fetchpriority="high" loading="eager" decoding="async">
       </div>
       <div class="hero__badge" aria-label="Kurze Einordnung">
         <span class="hero__badge-stars" aria-hidden="true">
@@ -102,7 +102,7 @@ body_class: "home-page"
       <h2 data-reveal>{{ home.process_title }}</h2>
       <p class="lead" data-reveal>{{ home.process_text }}</p>
       <div class="process__image" data-reveal>
-        <img src="{{ '/assets/images/process/care.webp' | relative_url }}" alt="Verpackte Umzugskisten und sorgfältig geschützte Gegenstände bereit für den Transport." width="1024" height="683" loading="lazy" decoding="async">
+        <img src="{{ '/assets/images/process/care-640.webp' | relative_url }}" srcset="{{ '/assets/images/process/care-640.webp' | relative_url }} 640w, {{ '/assets/images/process/care-960.webp' | relative_url }} 960w, {{ '/assets/images/process/care.webp' | relative_url }} 1280w" sizes="(max-width: 919px) calc(100vw - 2rem), (max-width: 1279px) 44vw, 560px" alt="Verpackte Umzugskisten und sorgfältig geschützte Gegenstände bereit für den Transport." width="1280" height="1280" loading="lazy" fetchpriority="low" decoding="async">
       </div>
     </div>
 

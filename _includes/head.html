@@ -80,7 +80,15 @@
   })();
 </script>
 <link rel="preload" href="{{ '/assets/fonts/archivo-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="{{ '/assets/fonts/source-sans-3-var.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+{% if page.body_class == 'home-page' or page.body_class == 'about-page' %}
+  <link
+    rel="preload"
+    as="image"
+    href="{{ '/assets/images/home/hero-480.webp' | relative_url }}"
+    imagesrcset="{{ '/assets/images/home/hero-480.webp' | relative_url }} 480w, {{ '/assets/images/home/hero-800.webp' | relative_url }} 800w, {{ '/assets/images/home/hero.webp' | relative_url }} 1080w"
+    imagesizes="(max-width: 919px) calc(100vw - 2rem), (max-width: 1279px) 44vw, 520px"
+    type="image/webp">
+{% endif %}
 <script>document.documentElement.classList.add('has-js');</script>
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <script type="application/ld+json">

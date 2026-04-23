@@ -1,4 +1,12 @@
+---
+layout: null
+permalink: /robots.txt
+---
 User-agent: *
+{% if site.noindex_site %}
 Disallow: /
+{% else %}
+Allow: /
+{% endif %}
 
-Sitemap: {{ site.url }}/sitemap.xml
+Sitemap: {{ site.production_url | default: site.url }}/sitemap.xml
