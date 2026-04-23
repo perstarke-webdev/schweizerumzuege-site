@@ -586,16 +586,24 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   border-bottom: 1px solid transparent;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  will-change: transform;
   transition:
     border-color var(--duration-base) var(--ease-out),
     background-color var(--duration-base) var(--ease-out),
-    box-shadow var(--duration-base) var(--ease-out);
+    box-shadow var(--duration-base) var(--ease-out),
+    transform 280ms var(--ease-out-expo),
+    opacity 220ms var(--ease-out);
 }
 .site-header.is-scrolled,
 .site-header.is-nav-open {
   border-color: var(--color-line);
   background: var(--color-surface-96);
   box-shadow: 0 8px 24px -12px var(--color-black-12);
+}
+.site-header.is-hidden:not(.is-nav-open) {
+  transform: translateY(calc(-100% - 0.75rem));
+  opacity: 0.01;
+  pointer-events: none;
 }
 
 .site-header__inner {
@@ -2284,13 +2292,16 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 
 /* Made-by badge — inspired by 8man, signature PSWD detail */
 .site-footer__badge {
+  --badge-orbit-thickness: 3px;
+  --badge-orbit-inset: 1.75px;
+  --badge-orbit-radius: 5.5px;
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 0.38rem;
-  border-radius: 0.96rem;
+  padding: 0.24rem;
+  border-radius: 0.52rem;
   background: var(--color-paper);
-  box-shadow: 0 0.5rem 1.5rem -0.5rem var(--color-black-22);
+  box-shadow: 0 0.45rem 1.3rem -0.65rem var(--color-black-22);
   overflow: hidden;
   transition: transform var(--duration-base) var(--ease-out);
 }
@@ -2300,8 +2311,8 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   position: absolute;
   top: 0;
   left: 0;
-  width: 16px;
-  height: 3.2px;
+  width: 14px;
+  height: var(--badge-orbit-thickness);
   background: linear-gradient(
     90deg,
     var(--color-badge-accent-transparent) 0%,
@@ -2310,26 +2321,33 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
     var(--color-badge-accent-transparent) 100%
   );
   border-radius: 999px;
-  offset-path: inset(2.2px round 10px);
+  offset-path: inset(var(--badge-orbit-inset) round var(--badge-orbit-radius));
   offset-anchor: 50% 50%;
   offset-rotate: auto;
   pointer-events: none;
   filter: drop-shadow(0 0 3px var(--color-badge-accent-soft));
+  transform-origin: 50% 50%;
 }
-.site-footer__badge::before { animation: badge-orbit-cw 7.1s linear infinite; }
-.site-footer__badge::after { width: 13px; opacity: 0.72; animation: badge-orbit-cw 7.1s linear infinite; animation-delay: -3.55s; }
+.site-footer__badge::before { animation: badge-orbit-cw 7.8s linear infinite; }
+.site-footer__badge::after {
+  width: 14px;
+  opacity: 0.78;
+  animation: badge-orbit-cw 7.8s linear infinite;
+  animation-delay: -3.9s;
+}
 .site-footer__badge-core {
   position: relative;
   z-index: 1;
   display: inline-flex;
   align-items: center;
-  min-height: 2.3rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.58rem;
+  min-height: 1.32rem;
+  padding: 0.24rem 0.88rem;
+  border-radius: 0.28rem;
   background: var(--color-paper);
   color: var(--color-graphite);
-  font-size: 0.88rem;
-  letter-spacing: 0.06em;
+  font-size: 0.66rem;
+  line-height: 1;
+  letter-spacing: 0.055em;
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -2337,8 +2355,42 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 .site-footer__badge:focus-visible { transform: translateY(-2px); }
 
 @keyframes badge-orbit-cw {
-  from { offset-distance: 0%; }
-  to { offset-distance: 100%; }
+  0% {
+    offset-distance: 0%;
+    transform: scaleX(0.92);
+  }
+  12% {
+    offset-distance: 8%;
+    transform: scaleX(0.88);
+  }
+  24% {
+    offset-distance: 14%;
+    transform: scaleX(0.78);
+  }
+  38% {
+    offset-distance: 31%;
+    transform: scaleX(1.34);
+  }
+  50% {
+    offset-distance: 50%;
+    transform: scaleX(1.52);
+  }
+  62% {
+    offset-distance: 64%;
+    transform: scaleX(1.28);
+  }
+  74% {
+    offset-distance: 70%;
+    transform: scaleX(0.8);
+  }
+  88% {
+    offset-distance: 90%;
+    transform: scaleX(1.42);
+  }
+  100% {
+    offset-distance: 100%;
+    transform: scaleX(0.92);
+  }
 }
 
 @media (max-width: 720px) {

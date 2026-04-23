@@ -78,16 +78,41 @@
   // -----------------------------------------------------------------
   // Header scroll state
   // -----------------------------------------------------------------
+  let lastScrollY = Math.max(window.scrollY, 0);
+  let headerTicking = false;
+
   const setHeaderState = () => {
     if (!header) return;
-    if (window.scrollY > 12) {
+    const currentScrollY = Math.max(window.scrollY, 0);
+    const scrollDelta = currentScrollY - lastScrollY;
+    const isPastTop = currentScrollY > 12;
+    const shouldHide = currentScrollY > 140 && scrollDelta > 6 && !header.classList.contains('is-nav-open');
+    const shouldShow = scrollDelta < -4 || currentScrollY <= 24 || header.classList.contains('is-nav-open');
+
+    if (isPastTop) {
       header.classList.add('is-scrolled');
     } else {
       header.classList.remove('is-scrolled');
     }
+
+    if (shouldHide) {
+      header.classList.add('is-hidden');
+    } else if (shouldShow) {
+      header.classList.remove('is-hidden');
+    }
+
+    lastScrollY = currentScrollY;
+    headerTicking = false;
   };
+
+  const queueHeaderState = () => {
+    if (headerTicking) return;
+    headerTicking = true;
+    window.requestAnimationFrame(setHeaderState);
+  };
+
   setHeaderState();
-  window.addEventListener('scroll', setHeaderState, { passive: true });
+  window.addEventListener('scroll', queueHeaderState, { passive: true });
 
   // -----------------------------------------------------------------
   // Mobile navigation
@@ -96,7 +121,10 @@
     if (!navPanel || !navToggle) return;
     navPanel.classList.add('is-open');
     doc.classList.add('has-nav-open');
-    if (header) header.classList.add('is-nav-open');
+    if (header) {
+      header.classList.add('is-nav-open');
+      header.classList.remove('is-hidden');
+    }
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Navigation schließen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation schließen';
@@ -110,6 +138,7 @@
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Navigation öffnen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation öffnen';
+    queueHeaderState();
   };
 
   if (navToggle && navPanel) {
