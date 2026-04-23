@@ -1,7 +1,7 @@
 ---
 title: "Dienstleistungen"
 seo_title: "Dienstleistungen | Schweizer Umzüge"
-description: "Professionelle Umzugsdienstleistungen mit klar strukturierten Abläufen, flexiblen Leistungen und transparenter Planung für Privatpersonen und Unternehmen."
+description: "Privat- und Geschäftsumzüge, Reinigung, Räumung, Lagerung und Umzugsplanung in Bern, Basel und Zürich."
 permalink: /dienstleistungen/
 body_class: "services-page"
 ---
@@ -43,7 +43,7 @@ body_class: "services-page"
           <h3 class="card__title">{{ service.title }}</h3>
           <p class="card__text">{{ service.detail }}</p>
           <div class="card__meta">
-            <span>Direkt zur Section</span>
+            <span>Details ansehen</span>
             <span aria-hidden="true">{% include icon.html name="arrow-right" size=18 %}</span>
           </div>
           <span class="card__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=18 %}</span>
@@ -107,8 +107,8 @@ body_class: "services-page"
     <div class="split__values">
       {% for point in page_data.flex_points %}
         <article class="split__value" data-reveal>
-          <h3>{{ point }}</h3>
-          <p>Leistungen und Ablauf werden passend zu Ihrer Situation kombiniert und sauber koordiniert.</p>
+          <h3>{{ point.title }}</h3>
+          <p>{{ point.text }}</p>
         </article>
       {% endfor %}
     </div>

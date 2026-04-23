@@ -36,6 +36,49 @@
 <meta property="twitter:title" content="{{ page_title }}">
 <meta property="twitter:description" content="{{ meta_description }}">
 <meta property="twitter:image" content="{{ og_image_url }}">
+<script>
+  (function () {
+    var storageKey = 'su-cookie-consent';
+    var cookieName = 'su_cookie_consent';
+
+    function escapeName(value) {
+      return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function readCookie(name) {
+      var match = document.cookie.match(new RegExp('(?:^|; )' + escapeName(name) + '=([^;]*)'));
+      return match ? decodeURIComponent(match[1]) : '';
+    }
+
+    var status = '';
+
+    try {
+      status = window.localStorage.getItem(storageKey) || '';
+    } catch (error) {
+      status = '';
+    }
+
+    if (!status) {
+      status = readCookie(cookieName);
+    }
+
+    if (status !== 'granted' && status !== 'denied') {
+      status = 'unset';
+    }
+
+    document.documentElement.dataset.cookieConsent = status;
+    document.documentElement.dataset.analyticsConsent = status === 'granted' ? 'granted' : 'denied';
+
+    window.siteConsent = {
+      status: status,
+      analytics: status === 'granted',
+      canUse: function (category) {
+        if (category === 'necessary') return true;
+        return category === 'analytics' ? this.analytics : false;
+      }
+    };
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">

@@ -1292,6 +1292,12 @@ h4 { font-size: 1.125rem; letter-spacing: 0; font-weight: 600; }
   color: var(--color-red);
 }
 
+.form__help {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-ink-soft);
+}
+
 .form__section-head {
   font-family: var(--font-body);
   font-size: 0.75rem;
@@ -1638,8 +1644,137 @@ h4 { font-size: 1.125rem; letter-spacing: 0; font-weight: 600; }
 }
 .site-footer__copy { font-size: 0.84rem; color: var(--color-surface-55); margin: 0; }
 .site-footer__legal { display: inline-flex; gap: 1.5rem; font-size: 0.84rem; }
-.site-footer__legal a { color: var(--color-surface-62); }
-.site-footer__legal a:hover, .site-footer__legal a:focus-visible { color: var(--color-surface); }
+.site-footer__legal a,
+.site-footer__legal button {
+  color: var(--color-surface-62);
+  font: inherit;
+}
+.site-footer__legal button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+.site-footer__legal a:hover,
+.site-footer__legal a:focus-visible,
+.site-footer__legal button:hover,
+.site-footer__legal button:focus-visible { color: var(--color-surface); }
+
+/* =============================================================
+   Cookie banner
+   ============================================================= */
+.cookie-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 1rem;
+  z-index: 70;
+  opacity: 0;
+  transform: translateY(1rem);
+  pointer-events: none;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+.cookie-banner.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.cookie-banner__panel {
+  margin-left: auto;
+  width: min(44rem, 100%);
+  padding: 1.3rem 1.4rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface-96);
+  box-shadow: var(--shadow-xl);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 760px) {
+  .cookie-banner__panel {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 1rem 1.5rem;
+    align-items: end;
+  }
+}
+
+.cookie-banner__content h2 {
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  margin-bottom: 0.7rem;
+}
+
+.cookie-banner__content p {
+  margin-bottom: 0.7rem;
+  color: var(--color-ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.58;
+}
+
+.cookie-banner__eyebrow {
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-red);
+}
+
+.cookie-banner__status {
+  margin-bottom: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.cookie-banner__link {
+  color: var(--color-red);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.cookie-banner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+@media (min-width: 760px) {
+  .cookie-banner__actions {
+    justify-content: flex-end;
+    align-self: end;
+  }
+}
+
+.cookie-banner__actions .button {
+  justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .cookie-banner {
+    bottom: 0.85rem;
+  }
+
+  .cookie-banner__panel {
+    width: 100%;
+    padding: 1.1rem 1rem;
+  }
+
+  .cookie-banner__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .cookie-banner__actions .button {
+    width: 100%;
+  }
+}
 
 /* Made-by badge — inspired by 8man, signature PSWD detail */
 .site-footer__badge {

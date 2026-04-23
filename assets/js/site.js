@@ -6,6 +6,74 @@
   const navToggle = document.querySelector('[data-nav-toggle]');
   const navPanel = document.querySelector('[data-nav-panel]');
   const navToggleLabel = document.querySelector('[data-nav-toggle-label]');
+  const COOKIE_CONSENT_STORAGE_KEY = 'su-cookie-consent';
+  const COOKIE_CONSENT_COOKIE_NAME = 'su_cookie_consent';
+  const COOKIE_CONSENT_MAX_AGE = 60 * 60 * 24 * 180;
+
+  const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+  const readCookie = (name) => {
+    const match = document.cookie.match(new RegExp(`(?:^|; )${escapeRegExp(name)}=([^;]*)`));
+    return match ? decodeURIComponent(match[1]) : '';
+  };
+
+  const normalizeConsentStatus = (value) => (
+    value === 'granted' || value === 'denied' ? value : 'unset'
+  );
+
+  const getStoredConsentStatus = () => {
+    let storedValue = '';
+
+    try {
+      storedValue = window.localStorage.getItem(COOKIE_CONSENT_STORAGE_KEY) || '';
+    } catch (error) {
+      storedValue = '';
+    }
+
+    if (!storedValue) {
+      storedValue = readCookie(COOKIE_CONSENT_COOKIE_NAME);
+    }
+
+    return normalizeConsentStatus(storedValue);
+  };
+
+  const applyConsentStatus = (status) => {
+    const normalized = normalizeConsentStatus(status);
+    const analyticsEnabled = normalized === 'granted';
+
+    doc.dataset.cookieConsent = normalized;
+    doc.dataset.analyticsConsent = analyticsEnabled ? 'granted' : 'denied';
+
+    window.siteConsent = window.siteConsent || {};
+    window.siteConsent.status = normalized;
+    window.siteConsent.analytics = analyticsEnabled;
+    window.siteConsent.canUse = function canUse(category) {
+      if (category === 'necessary') return true;
+      return category === 'analytics' ? this.analytics : false;
+    };
+
+    window.dispatchEvent(new CustomEvent('site:cookie-consent-change', {
+      detail: {
+        status: normalized,
+        analytics: analyticsEnabled,
+      },
+    }));
+  };
+
+  const persistConsentStatus = (status) => {
+    const normalized = normalizeConsentStatus(status);
+
+    try {
+      window.localStorage.setItem(COOKIE_CONSENT_STORAGE_KEY, normalized);
+    } catch (error) {
+      // Ignore storage failures and rely on the consent cookie fallback.
+    }
+
+    document.cookie = `${COOKIE_CONSENT_COOKIE_NAME}=${encodeURIComponent(normalized)}; max-age=${COOKIE_CONSENT_MAX_AGE}; path=/; SameSite=Lax`;
+    applyConsentStatus(normalized);
+  };
+
+  applyConsentStatus(getStoredConsentStatus());
 
   // -----------------------------------------------------------------
   // Header scroll state
@@ -30,8 +98,8 @@
     doc.classList.add('has-nav-open');
     if (header) header.classList.add('is-nav-open');
     navToggle.setAttribute('aria-expanded', 'true');
-    navToggle.setAttribute('aria-label', 'Navigation schliessen');
-    if (navToggleLabel) navToggleLabel.textContent = 'Navigation schliessen';
+    navToggle.setAttribute('aria-label', 'Navigation schließen');
+    if (navToggleLabel) navToggleLabel.textContent = 'Navigation schließen';
   };
 
   const closeNav = () => {
@@ -124,6 +192,91 @@
       target.focus({ preventScroll: true });
     });
   });
+
+  // -----------------------------------------------------------------
+  // Cookie banner / consent state
+  // -----------------------------------------------------------------
+  const initCookieBanner = () => {
+    const banner = document.querySelector('[data-cookie-banner]');
+    const statusLabel = document.querySelector('[data-cookie-status]');
+    const acceptButtons = document.querySelectorAll('[data-cookie-accept]');
+    const declineButtons = document.querySelectorAll('[data-cookie-decline]');
+    const settingsButtons = document.querySelectorAll('[data-cookie-settings]');
+
+    if (!banner) return;
+
+    let hideTimer = null;
+
+    const updateStatusLabel = () => {
+      if (!statusLabel) return;
+
+      if (window.siteConsent.status === 'granted') {
+        statusLabel.textContent = 'Aktuelle Auswahl: Optionale Analyse-Cookies sind freigegeben.';
+        return;
+      }
+
+      if (window.siteConsent.status === 'denied') {
+        statusLabel.textContent = 'Aktuelle Auswahl: Es sind nur notwendige Speicherungen aktiviert.';
+        return;
+      }
+
+      statusLabel.textContent = 'Sie können Ihre Auswahl jederzeit über die Cookie-Einstellungen im Footer ändern.';
+    };
+
+    const showBanner = () => {
+      if (hideTimer) {
+        window.clearTimeout(hideTimer);
+        hideTimer = null;
+      }
+
+      updateStatusLabel();
+      banner.hidden = false;
+      banner.offsetWidth;
+      banner.classList.add('is-visible');
+    };
+
+    const hideBanner = () => {
+      banner.classList.remove('is-visible');
+
+      hideTimer = window.setTimeout(() => {
+        banner.hidden = true;
+      }, 260);
+    };
+
+    window.siteConsent.openSettings = showBanner;
+
+    if (window.siteConsent.status === 'unset') {
+      showBanner();
+    }
+
+    acceptButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        persistConsentStatus('granted');
+        updateStatusLabel();
+        hideBanner();
+      });
+    });
+
+    declineButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        persistConsentStatus('denied');
+        updateStatusLabel();
+        hideBanner();
+      });
+    });
+
+    settingsButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        showBanner();
+      });
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !banner.hidden) {
+        hideBanner();
+      }
+    });
+  };
 
   const parseEmail = (value) => {
     const trimmed = (value || '').trim();
@@ -227,30 +380,30 @@
         }
 
         if (isFormSubmittedTooFast(form)) {
-          if (status) status.textContent = 'Bitte versuche es in einem Moment erneut.';
+          if (status) status.textContent = 'Bitte warten Sie einen Moment und senden Sie das Formular erneut.';
           return;
         }
 
         if (!parsedName) {
           if (nameInput) nameInput.classList.add('is-invalid');
-          if (nameError) nameError.textContent = 'Bitte geben Sie Ihren Namen ein.';
+          if (nameError) nameError.textContent = 'Bitte geben Sie Ihren Vor- und Nachnamen ein.';
           hasError = true;
         }
 
         if (parsedPhone === null) {
           if (phoneInput) phoneInput.classList.add('is-invalid');
-          if (phoneError) phoneError.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein.';
+          if (phoneError) phoneError.textContent = 'Bitte geben Sie eine gültige Telefonnummer ein, unter der wir Sie erreichen können.';
           hasError = true;
         }
 
         if (!parsedEmail) {
           if (emailInput) emailInput.classList.add('is-invalid');
-          if (emailError) emailError.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+          if (emailError) emailError.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein, z. B. name@example.ch.';
           hasError = true;
         }
 
         if (!privacyInput?.checked) {
-          if (privacyError) privacyError.textContent = 'Bitte akzeptieren Sie die Datenschutzerklärung.';
+          if (privacyError) privacyError.textContent = 'Bitte bestätigen Sie die Datenschutzerklärung.';
           hasError = true;
         }
 
@@ -269,7 +422,7 @@
         submitButton.disabled = true;
         submitButton.classList.remove('is-success', 'is-error');
         submitButton.classList.add('is-loading');
-        if (status) status.textContent = 'Wird verarbeitet...';
+        if (status) status.textContent = 'Ihre Anfrage wird gesendet...';
 
         submitFormsparkPayload(endpoint, payload)
           .then(() => {
@@ -289,7 +442,7 @@
             submitButton.classList.remove('is-loading');
             submitButton.classList.add('is-error');
             submitButton.innerHTML = defaultButtonHtml;
-            if (status) status.textContent = 'Gerade gab es ein Problem. Bitte versuchen Sie es erneut.';
+            if (status) status.textContent = 'Ihre Anfrage konnte gerade nicht gesendet werden. Bitte versuchen Sie es erneut oder rufen Sie uns an.';
           })
           .finally(() => {
             submitButton.disabled = false;
@@ -298,5 +451,6 @@
     });
   };
 
+  initCookieBanner();
   initOfferForms();
 })();

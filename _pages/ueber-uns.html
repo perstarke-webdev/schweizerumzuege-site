@@ -1,7 +1,7 @@
 ---
 title: "Über uns"
 seo_title: "Über uns | Schweizer Umzüge"
-description: "Schweizer Umzüge steht für strukturierte Planung, zuverlässige Durchführung und transparente Angebote für Privat- und Geschäftsumzüge."
+description: "Erfahren Sie, wie Schweizer Umzüge arbeitet: transparent, zuverlässig und persönlich."
 permalink: /ueber-uns/
 body_class: "about-page"
 ---
@@ -77,8 +77,8 @@ body_class: "about-page"
     <div class="split__values">
       {% for point in page_data.work_points %}
         <article class="split__value" data-reveal>
-          <h3>{{ point }}</h3>
-          <p>Jeder Schritt wird so organisiert, dass Aufwand reduziert und Zuverlässigkeit im Ablauf erhöht wird.</p>
+          <h3>{{ point.title }}</h3>
+          <p>{{ point.text }}</p>
         </article>
       {% endfor %}
     </div>

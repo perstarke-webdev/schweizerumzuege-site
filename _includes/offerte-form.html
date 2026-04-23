@@ -10,58 +10,59 @@
   <p class="form__section-head">Basisdaten</p>
   <div class="form__row form__row--2">
     <div class="form__field">
-      <label for="{{ form_id }}-name">Name</label>
-      <input id="{{ form_id }}-name" name="name" type="text" autocomplete="name" required aria-describedby="{{ form_id }}-name-error">
+      <label for="{{ form_id }}-name">Vor- und Nachname</label>
+      <input id="{{ form_id }}-name" name="name" type="text" autocomplete="name" placeholder="z. B. Anna Muster" required aria-describedby="{{ form_id }}-name-error">
       <p class="form__error" id="{{ form_id }}-name-error" data-error-for="name"></p>
     </div>
 
     <div class="form__field">
-      <label for="{{ form_id }}-phone">Telefonnummer <span class="optional">(optional)</span></label>
-      <input id="{{ form_id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" aria-describedby="{{ form_id }}-phone-error">
+      <label for="{{ form_id }}-phone">Telefonnummer für Rückfragen <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="z. B. 031 351 61 62" aria-describedby="{{ form_id }}-phone-error">
       <p class="form__error" id="{{ form_id }}-phone-error" data-error-for="phone"></p>
     </div>
   </div>
 
   <div class="form__field">
-    <label for="{{ form_id }}-email">E-Mail</label>
-    <input id="{{ form_id }}-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="{{ form_id }}-email-error">
+    <label for="{{ form_id }}-email">E-Mail für Ihre Offerte</label>
+    <input id="{{ form_id }}-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="z. B. anna@example.ch" required aria-describedby="{{ form_id }}-email-error">
     <p class="form__error" id="{{ form_id }}-email-error" data-error-for="email"></p>
   </div>
 
   <p class="form__section-head">Umzugsdetails <span class="optional">(optional)</span></p>
   <div class="form__row form__row--2">
     <div class="form__field">
-      <label for="{{ form_id }}-date">Umzugsdatum <span class="optional">(optional)</span></label>
+      <label for="{{ form_id }}-date">Gewünschtes Umzugsdatum <span class="optional">(optional)</span></label>
       <input id="{{ form_id }}-date" name="move_date" type="date">
     </div>
 
     <div class="form__field">
-      <label for="{{ form_id }}-size">Wohnungsgröße oder kurze Beschreibung <span class="optional">(optional)</span></label>
-      <input id="{{ form_id }}-size" name="move_size" type="text" autocomplete="off">
+      <label for="{{ form_id }}-size">Wohnungsgrösse oder Objekt <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-size" name="move_size" type="text" autocomplete="off" placeholder="z. B. 3.5 Zimmer oder Büro mit 8 Arbeitsplätzen">
+      <p class="form__help">Eine grobe Angabe reicht. Wir klären Details bei Bedarf mit Ihnen.</p>
     </div>
   </div>
 
   <div class="form__row form__row--2">
     <div class="form__field">
-      <label for="{{ form_id }}-from">Von <span class="optional">(optional)</span></label>
-      <input id="{{ form_id }}-from" name="move_from" type="text" autocomplete="street-address">
+      <label for="{{ form_id }}-from">Startadresse <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-from" name="move_from" type="text" autocomplete="street-address" placeholder="z. B. Kasparstrasse 15, 3027 Bern">
     </div>
 
     <div class="form__field">
-      <label for="{{ form_id }}-to">Nach <span class="optional">(optional)</span></label>
-      <input id="{{ form_id }}-to" name="move_to" type="text" autocomplete="street-address">
+      <label for="{{ form_id }}-to">Zieladresse <span class="optional">(optional)</span></label>
+      <input id="{{ form_id }}-to" name="move_to" type="text" autocomplete="street-address" placeholder="z. B. Zielstrasse 8, 4051 Basel">
     </div>
   </div>
 
   <p class="form__section-head">Zusatz <span class="optional">(optional)</span></p>
   <div class="form__field">
-    <label for="{{ form_id }}-message">Nachricht <span class="optional">(optional)</span></label>
-    <textarea id="{{ form_id }}-message" name="message" rows="6"></textarea>
+    <label for="{{ form_id }}-message">Was ist Ihnen wichtig? <span class="optional">(optional)</span></label>
+    <textarea id="{{ form_id }}-message" name="message" rows="6" placeholder="z. B. Lift vorhanden, Halteverbotszone nötig, Reinigung gewünscht oder sensible Möbelstücke"></textarea>
   </div>
 
   <label class="form__checkbox" for="{{ form_id }}-privacy">
     <input id="{{ form_id }}-privacy" name="privacy_accepted" type="checkbox" value="yes" required aria-describedby="{{ form_id }}-privacy-error">
-    <span>Ich akzeptiere die <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a>.</span>
+    <span>Ich habe die <a href="{{ '/datenschutz/' | relative_url }}">Datenschutzerklärung</a> gelesen und bin mit der Verarbeitung meiner Angaben einverstanden.</span>
   </label>
   <p class="form__error" id="{{ form_id }}-privacy-error" data-error-for="privacy_accepted"></p>
 
@@ -71,12 +72,12 @@
   </button>
 
   <ul class="form__micro" aria-label="Formularvorteile">
-    <li>Kostenlos und unverbindlich</li>
-    <li>Keine versteckten Kosten</li>
-    <li>Schnelle Rückmeldung</li>
+    <li>Kostenlos</li>
+    <li>Unverbindlich</li>
+    <li>Rückmeldung meist innerhalb von 24 Stunden</li>
   </ul>
 
-  <p class="form__hint">Wir melden uns in der Regel innerhalb von 24 Stunden bei Ihnen.</p>
+  <p class="form__hint">Pflichtfelder: Vor- und Nachname, E-Mail und Datenschutz. Alles andere hilft uns bei einer genaueren Einschätzung.</p>
   <p class="form__status" aria-live="polite" data-form-status></p>
   <p class="form__success" hidden data-form-success>{{ site.data.site.contact_page.form_success }}</p>
 </form>
