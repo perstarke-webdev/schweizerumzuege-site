@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-und-technologie-wie-smart-home-geraete-ihren-umzug-erleichtern/"
+live_url: "/umzug-und-technologie-wie-smart-home-geraete-ihren-umzug-erleichtern/"
 title: "Umzug und Technologie – Wie Smart-Home-Geräte Ihren Umzug erleichtern"
 date: 2025-04-12 13:02:51 +0000
 description: "Der Einsatz von Technologie kann Ihren Umzug erheblich erleichtern. Smart-Home-Geräte bieten nicht nur Komfort und Sicherheit, sondern können auch den..."

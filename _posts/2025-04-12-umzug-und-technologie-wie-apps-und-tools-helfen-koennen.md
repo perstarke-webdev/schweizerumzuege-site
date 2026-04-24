@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-und-technologie-wie-apps-und-tools-helfen-koennen/"
+live_url: "/umzug-und-technologie-wie-apps-und-tools-helfen-koennen/"
 title: "Umzug und Technologie – Wie Apps und Tools helfen können"
 date: 2025-04-12 12:52:09 +0000
 description: "In der heutigen digitalen Welt können Apps und technologische Tools den Umzugsprozess erheblich erleichtern. Von der Planung bis zur Organisation..."

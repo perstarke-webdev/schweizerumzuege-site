@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-mit-freunden-gemeinsam-zum-erfolg/"
+live_url: "/umzug-mit-freunden-gemeinsam-zum-erfolg/"
 title: "Umzug mit Freunden – Gemeinsam zum Erfolg"
 date: 2025-04-10 18:51:35 +0000
 description: "Ein Umzug kann eine große Herausforderung sein, aber mit der Unterstützung von Freunden wird er oft viel einfacher und angenehmer...."

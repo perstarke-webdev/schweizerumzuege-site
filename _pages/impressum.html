@@ -27,7 +27,7 @@ body_class: "legal-page"
   <ul>
     <li>Telefon: <a href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a></li>
     <li>E-Mail: <a href="mailto:{{ biz.email }}">{{ biz.email }}</a></li>
-    <li>Website: <a href="{{ site.url }}">{{ site.url }}</a></li>
+    <li>Website: <a href="{{ '/' | relative_url }}">{{ site.title }}</a></li>
   </ul>
 
   <h2>Haftung für Inhalte</h2>

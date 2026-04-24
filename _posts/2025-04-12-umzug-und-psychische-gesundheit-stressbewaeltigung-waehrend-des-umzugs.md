@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-und-psychische-gesundheit-stressbewaeltigung-waehrend-des-umzugs/"
+live_url: "/umzug-und-psychische-gesundheit-stressbewaeltigung-waehrend-des-umzugs/"
 title: "Umzug und psychische Gesundheit – Stressbewältigung während des Umzugs"
 date: 2025-04-12 13:25:07 +0000
 description: "Ein Umzug kann eine der stressigsten Erfahrungen im Leben sein. Die Kombination aus körperlicher Anstrengung, organisatorischem Aufwand und emotionalen Veränderungen..."

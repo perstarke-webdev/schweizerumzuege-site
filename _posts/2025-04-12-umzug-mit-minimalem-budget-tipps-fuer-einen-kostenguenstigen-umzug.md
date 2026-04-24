@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-mit-minimalem-budget-tipps-fuer-einen-kostenguenstigen-umzug/"
+live_url: "/umzug-mit-minimalem-budget-tipps-fuer-einen-kostenguenstigen-umzug/"
 title: "Umzug mit minimalem Budget –Tipps für einen kostengünstigen Umzug"
 date: 2025-04-12 13:17:43 +0000
 description: "Ein Umzug muss nicht teuer sein. Mit der richtigen Planung und einigen cleveren Tipps können Sie Ihren Umzug kostengünstig gestalten,..."

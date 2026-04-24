@@ -1,7 +1,7 @@
 ---
 layout: post
 source: "schweizerumzuege.ch"
-live_url: "https://schweizerumzuege.ch/umzug-mit-kunst-und-antiquitaeten-sicherer-transport-wertvoller-gegenstaende/"
+live_url: "/umzug-mit-kunst-und-antiquitaeten-sicherer-transport-wertvoller-gegenstaende/"
 title: "Umzug mit Kunst und Antiquitäten – Sicherer Transport wertvoller Gegenstände"
 date: 2025-04-12 13:09:49 +0000
 description: "Der Umzug von Kunstwerken und Antiquitäten erfordert besondere Sorgfalt und Planung. Diese wertvollen Gegenstände benötigen speziellen Schutz, um während des..."
