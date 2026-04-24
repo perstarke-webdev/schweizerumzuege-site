@@ -120,6 +120,7 @@
   const openNav = () => {
     if (!navPanel || !navToggle) return;
     navPanel.classList.add('is-open');
+    navPanel.scrollTop = 0;
     doc.classList.add('has-nav-open');
     if (header) {
       header.classList.add('is-nav-open');
@@ -170,10 +171,60 @@
   // -----------------------------------------------------------------
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const revealTargets = document.querySelectorAll('[data-reveal]');
+  const revealGroupSelector = [
+    '[data-reveal-group]',
+    '.hero__grid',
+    '.page-hero__grid',
+    '.post-hero__copy',
+    '.section__head',
+    '.section__headline-row',
+    '.services-grid',
+    '.process__steps',
+    '.impressions__track',
+    '.split__values',
+    '.advantages',
+    '.regions',
+    '.testimonials',
+    '.faq__list',
+    '.stats__grid',
+    '.blog-grid',
+    '.contact-alt',
+    '.cta-banner',
+  ].join(', ');
+
+  const getRevealGroup = (el) => (
+    el.closest(revealGroupSelector) || el.parentElement || document.body
+  );
+
+  const setRevealDelays = () => {
+    const groups = new Map();
+
+    revealTargets.forEach((el) => {
+      const group = getRevealGroup(el);
+      const groupItems = groups.get(group) || [];
+      groupItems.push(el);
+      groups.set(group, groupItems);
+    });
+
+    groups.forEach((items) => {
+      items
+        .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_PRECEDING ? 1 : -1))
+        .forEach((el, index) => {
+          const customDelay = el.dataset.revealDelay;
+          const delay = customDelay !== undefined && customDelay !== ''
+            ? Number.parseInt(customDelay, 10) || 0
+            : Math.min(index, 6) * 60;
+
+          el.style.setProperty('--reveal-delay', `${delay}ms`);
+        });
+    });
+  };
 
   if (prefersReducedMotion || !('IntersectionObserver' in window)) {
     revealTargets.forEach((el) => el.classList.add('is-visible'));
   } else {
+    setRevealDelays();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -186,11 +237,7 @@
       { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }
     );
 
-    revealTargets.forEach((el, i) => {
-      const delay = el.dataset.revealDelay || (i % 8) * 60;
-      el.style.setProperty('--reveal-delay', `${delay}ms`);
-      observer.observe(el);
-    });
+    revealTargets.forEach((el) => observer.observe(el));
   }
 
   // -----------------------------------------------------------------

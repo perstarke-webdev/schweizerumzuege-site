@@ -21,7 +21,7 @@ body_class: "home-page"
           {{ meta.cta.primary_label }}
           <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
         </a>
-        <a class="button button--secondary button--lg" href="{{ home.hero_secondary_url | relative_url }}">{{ home.hero_secondary_label }}</a>
+        <a class="button button--secondary button--lg" href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a>
       </div>
 
       <ul class="hero__trust" data-reveal aria-label="Vertrauensmerkmale">
