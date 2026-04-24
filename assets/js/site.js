@@ -117,8 +117,18 @@
   // -----------------------------------------------------------------
   // Mobile navigation
   // -----------------------------------------------------------------
+  let navScrollY = 0;
+
+  const preserveWindowScroll = () => {
+    const targetScrollY = navScrollY;
+    window.requestAnimationFrame(() => {
+      window.scrollTo(0, targetScrollY);
+    });
+  };
+
   const openNav = () => {
     if (!navPanel || !navToggle) return;
+    navScrollY = Math.max(window.scrollY, 0);
     navPanel.classList.add('is-open');
     navPanel.scrollTop = 0;
     doc.classList.add('has-nav-open');
@@ -129,16 +139,19 @@
     navToggle.setAttribute('aria-expanded', 'true');
     navToggle.setAttribute('aria-label', 'Navigation schließen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation schließen';
+    preserveWindowScroll();
   };
 
   const closeNav = () => {
     if (!navPanel || !navToggle) return;
+    navScrollY = Math.max(navScrollY, window.scrollY);
     navPanel.classList.remove('is-open');
     doc.classList.remove('has-nav-open');
     if (header) header.classList.remove('is-nav-open');
     navToggle.setAttribute('aria-expanded', 'false');
     navToggle.setAttribute('aria-label', 'Navigation öffnen');
     if (navToggleLabel) navToggleLabel.textContent = 'Navigation öffnen';
+    preserveWindowScroll();
     queueHeaderState();
   };
 
@@ -159,7 +172,7 @@
       }
     });
 
-    const mq = window.matchMedia('(min-width: 880px)');
+    const mq = window.matchMedia('(min-width: 1041px)');
     const handleMq = () => {
       if (mq.matches) closeNav();
     };

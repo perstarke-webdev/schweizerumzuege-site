@@ -2720,12 +2720,10 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 /* =============================================================
    Responsive nav
    ============================================================= */
-@media (max-width: 880px) {
+@media (max-width: 1040px) {
   :root { --header-height: 4.25rem; }
 
   .site-header.is-nav-open {
-    position: fixed;
-    inset: 0 0 auto;
     z-index: 80;
     will-change: auto;
     transform: none;
@@ -2735,6 +2733,12 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
       border-color var(--duration-base) var(--ease-out),
       background-color var(--duration-base) var(--ease-out),
       box-shadow var(--duration-base) var(--ease-out);
+  }
+
+  .site-header.is-hidden:not(.is-nav-open) {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .site-header__inner {
