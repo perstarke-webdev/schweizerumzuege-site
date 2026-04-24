@@ -11,7 +11,7 @@
       </div>
 
       <nav class="site-footer__col" aria-label="Navigation">
-        <h4 class="site-footer__heading">Navigation</h4>
+        <p class="site-footer__heading">Navigation</p>
         <ul>
           <li><a href="{{ '/' | relative_url }}">Start</a></li>
           <li><a href="{{ '/dienstleistungen/' | relative_url }}">Dienstleistungen</a></li>
@@ -23,7 +23,7 @@
       </nav>
 
       <nav class="site-footer__col" aria-label="Leistungen">
-        <h4 class="site-footer__heading">Leistungen</h4>
+        <p class="site-footer__heading">Leistungen</p>
         <ul>
           {% for s in meta.services %}
             <li><a href="{{ '/dienstleistungen/#' | append: s.slug | relative_url }}">{{ s.title }}</a></li>
@@ -32,7 +32,7 @@
       </nav>
 
       <div class="site-footer__col">
-        <h4 class="site-footer__heading">Kontakt</h4>
+        <p class="site-footer__heading">Kontakt</p>
         <ul class="site-footer__contact">
           <li><a href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a></li>
           <li><a href="mailto:{{ biz.email }}">{{ biz.email }}</a></li>

@@ -2423,7 +2423,10 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   --badge-orbit-radius: 5.5px;
   position: relative;
   display: inline-flex;
+  justify-self: start;
   align-items: center;
+  width: max-content;
+  max-width: 100%;
   padding: 0.24rem;
   border-radius: 0.52rem;
   background: var(--color-paper);
