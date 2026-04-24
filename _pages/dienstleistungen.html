@@ -41,7 +41,7 @@ body_class: "services-page"
         <a class="card services-grid__item card--link" href="#{{ service.slug }}" data-reveal aria-label="{{ service.title }} ansehen">
           <span class="card__icon">{% include icon.html name=service.icon size=20 %}</span>
           <h3 class="card__title">{{ service.title }}</h3>
-          <p class="card__text">{{ service.detail }}</p>
+          <p class="card__text">{{ service.short }}</p>
           <div class="card__meta">
             <span>Details ansehen</span>
             <span aria-hidden="true">{% include icon.html name="arrow-right" size=18 %}</span>
@@ -62,7 +62,6 @@ body_class: "services-page"
         </div>
 
         <div class="service-detail__body">
-          <p class="eyebrow" data-reveal>{{ service.title }}</p>
           <h2 data-reveal>{{ service.title }}</h2>
           <p class="lead" data-reveal>{{ service.long }}</p>
           <ul class="service-detail__bullets" data-reveal aria-label="{{ service.title }} Schwerpunkte">
@@ -80,6 +79,7 @@ body_class: "services-page"
 <section class="section">
   <div class="site-shell">
     <div class="section__head section__head--center">
+      <p class="eyebrow" data-reveal>Ablauf</p>
       <h2 data-reveal>{{ page_data.process_title }}</h2>
     </div>
 
@@ -100,6 +100,7 @@ body_class: "services-page"
 <section class="section section--paper-soft">
   <div class="site-shell split">
     <div>
+      <p class="eyebrow" data-reveal>Zusätzlicher Support</p>
       <h2 data-reveal>{{ page_data.flex_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.flex_text }}</p>
     </div>
@@ -118,7 +119,8 @@ body_class: "services-page"
 <section class="section">
   <div class="site-shell">
     <div class="section__head section__head--center">
-      <h2 data-reveal>{{ page_data.advantages_title }}</h2>
+      <p class="eyebrow" data-reveal>{{ site.data.site.home.advantages_eyebrow }}</p>
+      <h2 data-reveal>{{ site.data.site.home.advantages_title }}</h2>
     </div>
 
     <div class="advantages">

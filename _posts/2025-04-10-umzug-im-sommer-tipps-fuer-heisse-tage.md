@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 source: "schweizerumzuege.ch"
 title: "Umzug im Sommer – Tipps für heiße Tage"

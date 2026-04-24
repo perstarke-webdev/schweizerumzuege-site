@@ -33,6 +33,7 @@
     <div class="form__field">
       <label for="{{ form_id }}-date">Gewünschtes Umzugsdatum <span class="optional">(optional)</span></label>
       <input id="{{ form_id }}-date" name="move_date" type="date">
+      <p class="form__help form__help--placeholder" aria-hidden="true"></p>
     </div>
 
     <div class="form__field">
@@ -66,18 +67,19 @@
   </label>
   <p class="form__error" id="{{ form_id }}-privacy-error" data-error-for="privacy_accepted"></p>
 
-  <button class="button button--primary button--lg form__submit" type="submit" data-submit-label="Kostenlose Offerte anfragen">
-    Kostenlose Offerte anfragen
-    <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
-  </button>
+  <div class="form__submit-group">
+    <button class="button button--primary button--lg form__submit" type="submit" data-submit-label="Kostenlose Offerte anfragen">
+      Kostenlose Offerte anfragen
+      <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
+    </button>
 
-  <ul class="form__micro" aria-label="Formularvorteile">
-    <li>Kostenlos</li>
-    <li>Unverbindlich</li>
-    <li>Rückmeldung meist innerhalb von 24 Stunden</li>
-  </ul>
+    <ul class="form__micro" aria-label="Formularvorteile">
+      <li>Kostenlos</li>
+      <li>Unverbindlich</li>
+      <li>Rückmeldung meist innerhalb von 24 Stunden</li>
+    </ul>
+  </div>
 
-  <p class="form__hint">Pflichtfelder: Vor- und Nachname, E-Mail und Datenschutz. Alles andere hilft uns bei einer genaueren Einschätzung.</p>
   <p class="form__status" aria-live="polite" data-form-status></p>
   <p class="form__success" hidden data-form-success>{{ site.data.site.contact_page.form_success }}</p>
 </form>

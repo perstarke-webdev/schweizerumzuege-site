@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 source: "schweizerumzuege.ch"
 title: "Endreinigung mit Abnahmegarantie Bern – Perfekt sauber mit Schweizer Umzüge"

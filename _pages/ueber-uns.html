@@ -30,6 +30,7 @@ body_class: "about-page"
 <section class="section">
   <div class="site-shell site-shell--narrow">
     <div class="section__head section__head--center">
+      <p class="eyebrow" data-reveal>Unsere Werte</p>
       <h2 data-reveal>{{ page_data.intro_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.intro_text }}</p>
     </div>
@@ -39,12 +40,12 @@ body_class: "about-page"
 <section class="section section--paper-soft">
   <div class="site-shell split">
     <div>
-      <p class="eyebrow" data-reveal>Unser Anspruch</p>
+      <p class="eyebrow" data-reveal>Haltung</p>
       <h2 data-reveal>{{ page_data.mission_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.mission_text }}</p>
     </div>
 
-    <div class="split__visual" data-reveal>
+    <div class="split__visual split__visual--square" data-reveal>
       <img src="{{ '/assets/images/services/private.webp' | relative_url }}" alt="Vorbereiteter Umzugswagen mit sauber gestapelten Kartons." width="1024" height="682" loading="lazy" decoding="async">
     </div>
   </div>
@@ -53,6 +54,7 @@ body_class: "about-page"
 <section class="section">
   <div class="site-shell">
     <div class="section__head section__head--center">
+      <p class="eyebrow" data-reveal>Standards für jeden Umzug</p>
       <h2 data-reveal>{{ page_data.values_title }}</h2>
     </div>
 
@@ -70,6 +72,7 @@ body_class: "about-page"
 <section class="section section--paper">
   <div class="site-shell split">
     <div>
+      <p class="eyebrow" data-reveal>Arbeitsweise</p>
       <h2 data-reveal>{{ page_data.work_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.work_text }}</p>
     </div>
@@ -85,11 +88,9 @@ body_class: "about-page"
   </div>
 </section>
 
-<section class="stats" aria-labelledby="proof-title">
+<section class="stats stats--compact" aria-labelledby="proof-title">
   <div class="site-shell">
-    <div class="section__head section__head--center section--tight">
-      <h2 class="visually-hidden" id="proof-title">{{ page_data.proof_title }}</h2>
-    </div>
+    <h2 class="visually-hidden" id="proof-title">{{ page_data.proof_title }}</h2>
     <div class="stats__grid">
       {% for stat in meta.stats %}
         <div class="stats__item" data-reveal>
@@ -107,14 +108,67 @@ body_class: "about-page"
 </section>
 
 <section class="section">
-  <div class="site-shell split split--left-img">
-    <div>
+  <div class="site-shell">
+    <div class="section__head section__head--center">
+      <p class="eyebrow" data-reveal>Einblicke</p>
       <h2 data-reveal>{{ page_data.insights_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.insights_text }}</p>
     </div>
 
-    <div class="split__visual" data-reveal>
-      <img src="{{ '/assets/images/services/business.webp' | relative_url }}" alt="Echte Einblicke in die tägliche Arbeit von Schweizer Umzüge." width="1024" height="683" loading="lazy" decoding="async">
+    <div class="impressions-gallery" data-gallery>
+      <div class="impressions__controls" data-reveal aria-label="Galerie-Steuerung">
+        <button class="impressions__nav" type="button" data-gallery-prev aria-label="Vorherige Bilder">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <button class="impressions__nav" type="button" data-gallery-next aria-label="Nächste Bilder">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <div class="impressions__viewport">
+        <div class="impressions" aria-label="Einblicke in die Arbeit von Schweizer Umzüge" data-gallery-track tabindex="0">
+          <figure class="impressions__item" data-reveal>
+            <a class="impressions__trigger" href="{{ '/assets/images/impressions/apartment.webp' | relative_url }}" data-gallery-open data-gallery-alt="Verpackte Umzugskartons in einem hellen Wohnraum." aria-label="Bild öffnen: Verpackte Umzugskartons in einem hellen Wohnraum.">
+              <img src="{{ '/assets/images/impressions/apartment.webp' | relative_url }}" alt="Verpackte Umzugskartons in einem hellen Wohnraum." width="1024" height="683" loading="lazy" decoding="async">
+              <span class="impressions__hint">Bild öffnen</span>
+            </a>
+          </figure>
+          <figure class="impressions__item" data-reveal>
+            <a class="impressions__trigger" href="{{ '/assets/images/impressions/couple.webp' | relative_url }}" data-gallery-open data-gallery-alt="Kunden begleiten den Umzug in entspannter Atmosphäre." aria-label="Bild öffnen: Kunden begleiten den Umzug in entspannter Atmosphäre.">
+              <img src="{{ '/assets/images/impressions/couple.webp' | relative_url }}" alt="Kunden begleiten den Umzug in entspannter Atmosphäre." width="1024" height="683" loading="lazy" decoding="async">
+              <span class="impressions__hint">Bild öffnen</span>
+            </a>
+          </figure>
+          <figure class="impressions__item" data-reveal>
+            <a class="impressions__trigger" href="{{ '/assets/images/impressions/tape.webp' | relative_url }}" data-gallery-open data-gallery-alt="Sorgfältig vorbereitetes Verpackungsmaterial für den Umzug." aria-label="Bild öffnen: Sorgfältig vorbereitetes Verpackungsmaterial für den Umzug.">
+              <img src="{{ '/assets/images/impressions/tape.webp' | relative_url }}" alt="Sorgfältig vorbereitetes Verpackungsmaterial für den Umzug." width="1024" height="683" loading="lazy" decoding="async">
+              <span class="impressions__hint">Bild öffnen</span>
+            </a>
+          </figure>
+          <figure class="impressions__item" data-reveal>
+            <a class="impressions__trigger" href="{{ '/assets/images/about/van.webp' | relative_url }}" data-gallery-open data-gallery-alt="Geladene Umzugskisten im Fahrzeug von Schweizer Umzüge." aria-label="Bild öffnen: Geladene Umzugskisten im Fahrzeug von Schweizer Umzüge.">
+              <img src="{{ '/assets/images/about/van.webp' | relative_url }}" alt="Geladene Umzugskisten im Fahrzeug von Schweizer Umzüge." width="1030" height="686" loading="lazy" decoding="async">
+              <span class="impressions__hint">Bild öffnen</span>
+            </a>
+          </figure>
+        </div>
+      </div>
+
+      <dialog class="gallery-lightbox" data-gallery-lightbox aria-label="Bildansicht">
+        <div class="gallery-lightbox__frame">
+          <button class="gallery-lightbox__close" type="button" data-gallery-lightbox-close aria-label="Bildansicht schließen">×</button>
+          <button class="gallery-lightbox__nav gallery-lightbox__nav--prev" type="button" data-gallery-lightbox-prev aria-label="Vorheriges Bild">
+            <span aria-hidden="true">‹</span>
+          </button>
+          <figure class="gallery-lightbox__figure">
+            <img src="" alt="" data-gallery-lightbox-image>
+            <figcaption data-gallery-lightbox-caption></figcaption>
+          </figure>
+          <button class="gallery-lightbox__nav gallery-lightbox__nav--next" type="button" data-gallery-lightbox-next aria-label="Nächstes Bild">
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
+      </dialog>
     </div>
   </div>
 </section>

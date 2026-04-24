@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 source: "schweizerumzuege.ch"
 title: "Umzug in eine Mietwohnung – Was Sie wissen müssen"

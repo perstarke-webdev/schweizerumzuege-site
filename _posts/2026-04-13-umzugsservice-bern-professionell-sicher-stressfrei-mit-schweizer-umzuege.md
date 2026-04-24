@@ -1,4 +1,5 @@
 ---
+published: false
 layout: post
 source: "schweizerumzuege.ch"
 title: "Umzugsservice Bern – Professionell, sicher & stressfrei mit Schweizer Umzüge"

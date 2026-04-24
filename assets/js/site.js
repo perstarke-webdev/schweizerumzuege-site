@@ -309,130 +309,89 @@
 
   const initFaqMotion = () => {
     const faqItems = document.querySelectorAll('.faq__item');
-    if (!faqItems.length || prefersReducedMotion || typeof HTMLElement.prototype.animate !== 'function') {
+    if (!faqItems.length) {
       return;
     }
 
-    const easing = 'cubic-bezier(0.22, 1, 0.36, 1)';
-
-    faqItems.forEach((item) => {
+    const animateFaqItem = (item, shouldOpen) => {
       const summary = item.querySelector('.faq__summary');
-      const content = item.querySelector('.faq__content');
-      if (!summary || !content) return;
+      if (!summary) return;
 
-      let heightAnimation = null;
-      let contentAnimation = null;
-      let isClosing = false;
+      if (item.faqAnimation) {
+        item.faqAnimation.cancel();
+      }
 
-      const clearContentStyles = () => {
-        content.style.opacity = '';
-        content.style.transform = '';
-      };
+      const startHeight = `${item.offsetHeight}px`;
 
-      const cleanup = () => {
+      if (shouldOpen) {
+        item.open = true;
+      }
+
+      const endHeight = shouldOpen ? `${item.offsetHeight}px` : `${summary.offsetHeight}px`;
+
+      item.classList.add('is-animating');
+      item.style.height = startHeight;
+      item.style.overflow = 'hidden';
+
+      item.faqAnimation = item.animate({
+        height: [startHeight, endHeight],
+      }, {
+        duration: shouldOpen ? 260 : 200,
+        easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      });
+
+      item.faqAnimation.onfinish = () => {
+        item.open = shouldOpen;
         item.style.height = '';
         item.style.overflow = '';
         item.classList.remove('is-animating');
-        clearContentStyles();
-        heightAnimation = null;
-        contentAnimation = null;
-        isClosing = false;
+        item.faqAnimation = null;
       };
 
-      const animateContent = (opening) => {
-        if (contentAnimation) {
-          contentAnimation.cancel();
+      item.faqAnimation.oncancel = () => {
+        item.style.height = '';
+        item.style.overflow = '';
+        item.classList.remove('is-animating');
+        item.faqAnimation = null;
+      };
+    };
+
+    const closeSiblingFaqItems = (item, items) => {
+      items.forEach((sibling) => {
+        if (sibling !== item && sibling.open) {
+          animateFaqItem(sibling, false);
+        }
+      });
+    };
+
+    document.querySelectorAll('.faq__list').forEach((faqList) => {
+      const items = Array.from(faqList.querySelectorAll('.faq__item'));
+      let firstOpenItem = null;
+
+      items.forEach((item) => {
+        if (item.open && !firstOpenItem) {
+          firstOpenItem = item;
+        } else if (item.open) {
+          item.open = false;
         }
 
-        contentAnimation = content.animate(
-          opening
-            ? [
-              { opacity: 0, transform: 'translate3d(0, -0.35rem, 0)' },
-              { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-            ]
-            : [
-              { opacity: 1, transform: 'translate3d(0, 0, 0)' },
-              { opacity: 0, transform: 'translate3d(0, -0.25rem, 0)' },
-            ],
-          {
-            duration: opening ? 220 : 160,
-            easing,
-            fill: 'both',
+        item.querySelector('.faq__summary')?.addEventListener('click', (event) => {
+          if (prefersReducedMotion || typeof HTMLElement.prototype.animate !== 'function') {
+            window.requestAnimationFrame(() => {
+              if (item.open) closeSiblingFaqItems(item, items);
+            });
+            return;
           }
-        );
-      };
 
-      const onAnimationFinish = (openState) => {
-        item.open = openState;
-        cleanup();
-      };
+          event.preventDefault();
 
-      const shrink = () => {
-        isClosing = true;
-        item.classList.add('is-animating');
-        item.style.overflow = 'hidden';
-
-        const startHeight = `${item.offsetHeight}px`;
-        const endHeight = `${summary.offsetHeight}px`;
-
-        item.style.height = startHeight;
-
-        if (heightAnimation) {
-          heightAnimation.cancel();
-        }
-
-        animateContent(false);
-        heightAnimation = item.animate(
-          { height: [startHeight, endHeight] },
-          {
-            duration: 260,
-            easing,
-            fill: 'forwards',
+          if (item.open) {
+            animateFaqItem(item, false);
+          } else {
+            closeSiblingFaqItems(item, items);
+            animateFaqItem(item, true);
           }
-        );
-
-        heightAnimation.onfinish = () => onAnimationFinish(false);
-        heightAnimation.oncancel = () => {
-          isClosing = false;
-        };
-      };
-
-      const expand = () => {
-        item.classList.add('is-animating');
-        item.style.overflow = 'hidden';
-
-        const startHeight = `${item.offsetHeight}px`;
-        item.open = true;
-        const endHeight = `${item.offsetHeight}px`;
-
-        item.style.height = startHeight;
-
-        if (heightAnimation) {
-          heightAnimation.cancel();
-        }
-
-        animateContent(true);
-        heightAnimation = item.animate(
-          { height: [startHeight, endHeight] },
-          {
-            duration: 320,
-            easing,
-            fill: 'forwards',
-          }
-        );
-
-        heightAnimation.onfinish = () => onAnimationFinish(true);
-      };
-
-      summary.addEventListener('click', (event) => {
-        event.preventDefault();
-
-        if (isClosing || !item.open) {
-          expand();
-          return;
-        }
-
-        shrink();
+        });
       });
     });
   };

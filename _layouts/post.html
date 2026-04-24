@@ -1,19 +1,22 @@
 ---
 layout: default
 ---
-<article>
-  <section class="page-hero post-hero">
-    <div class="site-shell site-shell--narrow">
-      <p class="eyebrow" data-reveal>Blog</p>
-      <p class="post-hero__meta" data-reveal>{{ page.date | date: "%d.%m.%Y" }}</p>
-      <h1 class="post-hero__title" data-reveal>{{ page.title }}</h1>
-      {% if page.description %}
-        <p class="lead" data-reveal>{{ page.description }}</p>
-      {% endif %}
+<article class="post-article">
+  <section class="post-hero">
+    <div class="site-shell post-hero__inner">
+      <div class="post-hero__copy">
+        <p class="eyebrow" data-reveal>Blog</p>
+        <h1 class="post-hero__title" data-reveal>{{ page.title }}</h1>
+        {% if page.description %}
+          <p class="lead" data-reveal>{{ page.description }}</p>
+        {% endif %}
+        <p class="post-hero__meta" data-reveal>Zuletzt geupdatet am: {{ page.date | date: "%d.%m.%Y" }}</p>
+      </div>
+
       {% if page.image %}
-        <div class="post-hero__image" data-reveal>
+        <figure class="post-hero__image" data-reveal>
           <img src="{{ page.image | relative_url }}" alt="{{ page.image_alt | default: page.title }}" width="1200" height="675" loading="eager" decoding="async">
-        </div>
+        </figure>
       {% endif %}
     </div>
   </section>
@@ -22,11 +25,11 @@ layout: default
     {{ content }}
 
     <nav class="post-nav" aria-label="Beitragsnavigation">
-      <a class="link-arrow" href="{{ '/blog/' | relative_url }}">
+      <a class="link-arrow post-nav__back" href="{{ '/blog/' | relative_url }}">
         {% include icon.html name="arrow-right" size=16 %}
         <span>Zurück zur Blogübersicht</span>
       </a>
-      <a class="button button--secondary button--sm" href="{{ '/kontakt/' | relative_url }}">Kostenlose Offerte anfragen</a>
+      <a class="button button--primary button--sm" href="{{ '/kontakt/' | relative_url }}">Kostenlose Offerte anfragen</a>
     </nav>
   </div>
 </article>
