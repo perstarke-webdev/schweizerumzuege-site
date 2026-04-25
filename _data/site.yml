@@ -134,7 +134,7 @@ values:
     text: "Termine, Absprachen und Zuständigkeiten bleiben verbindlich."
 
 developer:
-  label: "Made by KSWD"
+  label: "Made by: KSWD"
   url: "https://kroener-starke.ch/"
 
 footer:

@@ -254,6 +254,86 @@
   }
 
   // -----------------------------------------------------------------
+  // Footer badge orbit
+  // -----------------------------------------------------------------
+  const initBadgeOrbit = () => {
+    const orbits = document.querySelectorAll('[data-badge-orbit]');
+    if (!orbits.length) return;
+
+    const normalizeLength = (value, fallback) => {
+      const parsed = Number.parseFloat(value);
+      return Number.isFinite(parsed) ? parsed : fallback;
+    };
+
+    const normalizeDuration = (value, fallback) => {
+      const parsed = Number.parseFloat(value);
+      if (!Number.isFinite(parsed)) return fallback;
+      return value.trim().endsWith('ms') ? parsed : parsed * 1000;
+    };
+
+    orbits.forEach((orbit) => {
+      const rail = orbit.querySelector('.site-footer__badge-orbit-rail');
+      const traces = Array.from(orbit.querySelectorAll('.site-footer__badge-orbit-trace'));
+      if (!rail || traces.length < 2 || typeof rail.getTotalLength !== 'function') return;
+
+      const badge = orbit.closest('.site-footer__badge') || orbit;
+      const styles = window.getComputedStyle(badge);
+      const total = rail.getTotalLength();
+      const traceLength = total * (normalizeLength(styles.getPropertyValue('--badge-trace-length'), 8) / 100);
+      const duration = normalizeDuration(styles.getPropertyValue('--badge-orbit-duration'), 6800);
+      const steps = Math.max(10, Math.ceil(traceLength / 1.25));
+      let animationFrame = 0;
+      let startTime = 0;
+
+      const pointAt = (distance) => {
+        const normalized = ((distance % total) + total) % total;
+        return rail.getPointAtLength(normalized);
+      };
+
+      const buildTrace = (start) => {
+        let path = '';
+
+        for (let index = 0; index <= steps; index += 1) {
+          const point = pointAt(start + (traceLength * index) / steps);
+          const command = index === 0 ? 'M' : 'L';
+          path += `${command} ${point.x.toFixed(2)} ${point.y.toFixed(2)} `;
+        }
+
+        return path.trim();
+      };
+
+      const draw = (distance) => {
+        traces[0].setAttribute('d', buildTrace(distance));
+        traces[1].setAttribute('d', buildTrace(distance + total / 2));
+      };
+
+      draw(0);
+      orbit.classList.add('is-ready');
+
+      if (prefersReducedMotion) return;
+
+      const tick = (timestamp) => {
+        if (!startTime) startTime = timestamp;
+        const progress = ((timestamp - startTime) % duration) / duration;
+        draw(progress * total);
+        animationFrame = window.requestAnimationFrame(tick);
+      };
+
+      animationFrame = window.requestAnimationFrame(tick);
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden && animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = 0;
+        } else if (!document.hidden && !animationFrame) {
+          startTime = 0;
+          animationFrame = window.requestAnimationFrame(tick);
+        }
+      });
+    });
+  };
+
+  // -----------------------------------------------------------------
   // Current year (footer, fallback if Liquid missed any)
   // -----------------------------------------------------------------
   document.querySelectorAll('[data-current-year]').forEach((el) => {
@@ -838,5 +918,6 @@
   initCookieBanner();
   initFaqMotion();
   initGallery();
+  initBadgeOrbit();
   initOfferForms();
 })();
