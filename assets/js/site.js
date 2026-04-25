@@ -279,22 +279,41 @@
       const badge = orbit.closest('.site-footer__badge') || orbit;
       const styles = window.getComputedStyle(badge);
       const total = rail.getTotalLength();
-      const traceLength = total * (normalizeLength(styles.getPropertyValue('--badge-trace-length'), 8) / 100);
+      const baseTraceLength = total * (normalizeLength(styles.getPropertyValue('--badge-trace-length'), 8) / 100);
+      const baseOpacity = normalizeLength(styles.getPropertyValue('--badge-trace-opacity'), 0.67);
       const duration = normalizeDuration(styles.getPropertyValue('--badge-orbit-duration'), 6800);
-      const steps = Math.max(10, Math.ceil(traceLength / 1.25));
       let animationFrame = 0;
-      let startTime = 0;
+      let lastTimestamp = 0;
+      let distance = 0;
 
       const pointAt = (distance) => {
         const normalized = ((distance % total) + total) % total;
         return rail.getPointAtLength(normalized);
       };
 
-      const buildTrace = (start) => {
+      const sideBiasAt = (distance) => {
+        const phase = (((distance / total) % 1) + 1) % 1;
+        const sideBias = Math.sin(phase * Math.PI * 2);
+        return sideBias * sideBias;
+      };
+
+      const getMotionState = (distance) => {
+        const sideBias = sideBiasAt(distance);
+
+        return {
+          length: baseTraceLength * (0.5 + sideBias * 1.5),
+          opacity: Math.min(1, baseOpacity * (1 + sideBias * 0.5)),
+          speed: 0.5 + sideBias * 1.5,
+        };
+      };
+
+      const buildTrace = (center, length) => {
         let path = '';
+        const steps = Math.max(10, Math.ceil(length / 1.25));
+        const start = center - length / 2;
 
         for (let index = 0; index <= steps; index += 1) {
-          const point = pointAt(start + (traceLength * index) / steps);
+          const point = pointAt(start + (length * index) / steps);
           const command = index === 0 ? 'M' : 'L';
           path += `${command} ${point.x.toFixed(2)} ${point.y.toFixed(2)} `;
         }
@@ -303,8 +322,13 @@
       };
 
       const draw = (distance) => {
-        traces[0].setAttribute('d', buildTrace(distance));
-        traces[1].setAttribute('d', buildTrace(distance + total / 2));
+        const state = getMotionState(distance);
+
+        traces[0].setAttribute('d', buildTrace(distance, state.length));
+        traces[1].setAttribute('d', buildTrace(distance + total / 2, state.length));
+        traces.forEach((trace) => {
+          trace.style.opacity = state.opacity.toFixed(3);
+        });
       };
 
       draw(0);
@@ -313,9 +337,12 @@
       if (prefersReducedMotion) return;
 
       const tick = (timestamp) => {
-        if (!startTime) startTime = timestamp;
-        const progress = ((timestamp - startTime) % duration) / duration;
-        draw(progress * total);
+        if (!lastTimestamp) lastTimestamp = timestamp;
+        const elapsed = timestamp - lastTimestamp;
+        const state = getMotionState(distance);
+        distance = (distance + (total * elapsed * state.speed) / duration) % total;
+        draw(distance);
+        lastTimestamp = timestamp;
         animationFrame = window.requestAnimationFrame(tick);
       };
 
@@ -326,7 +353,7 @@
           window.cancelAnimationFrame(animationFrame);
           animationFrame = 0;
         } else if (!document.hidden && !animationFrame) {
-          startTime = 0;
+          lastTimestamp = 0;
           animationFrame = window.requestAnimationFrame(tick);
         }
       });

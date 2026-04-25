@@ -2421,7 +2421,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   --badge-orbit-duration: 6.8s;
   --badge-orbit-thickness: 1px;
   --badge-trace-length: 8;
-  --badge-trace-opacity: 0.7;
+  --badge-trace-opacity: 0.67;
   --badge-rail: color-mix(in srgb, var(--color-paper) 90%, var(--color-ink) 10%);
   position: relative;
   display: inline-flex;
@@ -2460,7 +2460,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   stroke-width: 1;
 }
 .site-footer__badge-orbit-trace {
-  stroke: var(--color-badge-accent);
+  stroke: rgb(124, 58, 237);
   stroke-width: var(--badge-orbit-thickness);
   stroke-linecap: round;
   opacity: 0;
