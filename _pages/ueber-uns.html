@@ -30,7 +30,7 @@ body_class: "about-page"
   </div>
 </section>
 
-<section class="section">
+<section class="section section--about-intro">
   <div class="site-shell site-shell--narrow">
     <div class="section__head section__head--center">
       <p class="eyebrow" data-reveal>Unsere Werte</p>
@@ -46,6 +46,12 @@ body_class: "about-page"
       <p class="eyebrow" data-reveal>Haltung</p>
       <h2 data-reveal>{{ page_data.mission_title }}</h2>
       <p class="lead" data-reveal>{{ page_data.mission_text }}</p>
+      <div class="split__cta" data-reveal>
+        <a class="button button--primary" href="{{ meta.cta.primary_url | relative_url }}">
+          Jetzt Offerte anfragen
+          <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
+        </a>
+      </div>
     </div>
 
     <div class="split__visual split__visual--square" data-reveal>
@@ -61,7 +67,7 @@ body_class: "about-page"
       <h2 data-reveal>{{ page_data.values_title }}</h2>
     </div>
 
-    <div class="services-grid">
+    <div class="services-grid card-grid--accent-headings">
       {% for value in meta.values %}
         <article class="card" data-reveal>
           <h3 class="card__title">{{ value.title }}</h3>
@@ -80,7 +86,7 @@ body_class: "about-page"
       <p class="lead" data-reveal>{{ page_data.work_text }}</p>
     </div>
 
-    <div class="split__values">
+    <div class="split__values split__values--clean split__values--accent-headings">
       {% for point in page_data.work_points %}
         <article class="split__value" data-reveal>
           <h3>{{ point.title }}</h3>

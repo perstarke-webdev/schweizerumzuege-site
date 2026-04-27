@@ -190,10 +190,13 @@ body_class: "home-page"
   <div class="site-shell split split--left-img">
     <div>
       <p class="eyebrow" data-reveal>{{ home.about_eyebrow }}</p>
+      <div class="split__brand-mark" data-reveal>
+        <img src="{{ '/assets/images/logo.svg' | relative_url }}" alt="Schweizer Umzüge" width="220" height="72" loading="lazy" decoding="async">
+      </div>
       <h2 data-reveal>{{ home.about_title }}</h2>
       <p class="lead" data-reveal>{{ home.about_text }}</p>
 
-      <div class="split__values">
+      <div class="split__values split__values--clean">
         {% for value in meta.values %}
           <article class="split__value" data-reveal>
             <h3>{{ value.title }}</h3>
@@ -237,6 +240,7 @@ body_class: "home-page"
       <p class="eyebrow" data-reveal>{{ home.regions_eyebrow }}</p>
       <h2 data-reveal>{{ home.regions_title }}</h2>
       <p class="lead" data-reveal>{{ home.regions_text }}</p>
+      <a class="button button--secondary regions__cta" href="{{ '/kontakt/' | relative_url }}" data-reveal>Kommen Sie auf uns zu</a>
     </div>
 
     <div class="regions">
@@ -257,9 +261,13 @@ body_class: "home-page"
       <h2 data-reveal>{{ home.testimonials_title }}</h2>
     </div>
 
-    <div class="testimonials">
+    <div class="testimonial-carousel" data-testimonial-carousel data-testimonial-autoplay="6800" data-reveal aria-roledescription="carousel" aria-label="Kundenstimmen">
+      <div class="testimonial-carousel__viewport">
       {% for item in meta.testimonials %}
-        <article class="testimonial" data-reveal>
+        <article class="testimonial testimonial-slide{% if forloop.first %} is-active{% endif %}" data-testimonial-slide aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
+          {% if item.placeholder %}
+            <span class="testimonial__placeholder">Platzhalter</span>
+          {% endif %}
           <span class="testimonial__stars" aria-hidden="true">
             {% for i in (1..5) %}
               <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>
@@ -275,6 +283,23 @@ body_class: "home-page"
           </div>
         </article>
       {% endfor %}
+      </div>
+
+      <div class="testimonial-carousel__controls" aria-label="Kundenstimmen steuern">
+        <button class="testimonial-carousel__nav" type="button" data-testimonial-prev aria-label="Vorherige Kundenstimme">
+          <span aria-hidden="true">‹</span>
+        </button>
+        <div class="testimonial-carousel__dots" role="tablist" aria-label="Kundenstimme auswählen">
+          {% for item in meta.testimonials %}
+            <button class="testimonial-carousel__dot{% if forloop.first %} is-active{% endif %}" type="button" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" data-testimonial-dot="{{ forloop.index0 }}">
+              <span class="visually-hidden">Kundenstimme {{ forloop.index }}</span>
+            </button>
+          {% endfor %}
+        </div>
+        <button class="testimonial-carousel__nav" type="button" data-testimonial-next aria-label="Nächste Kundenstimme">
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
     </div>
   </div>
 </section>

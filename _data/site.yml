@@ -91,7 +91,7 @@ process:
     text: "Sie teilen uns die wichtigsten Eckdaten mit. Auch grobe Angaben reichen für eine erste Einschätzung."
   - num: "02"
     title: "Beratung & Offerte"
-    text: "Wir klären offene Punkte, besprechen Ihren Bedarf und erstellen eine kostenlose Offerte. Bei Bedarf vereinbaren wir eine Besichtigung."
+    text: "Wir klären alle offenen Punkte und Ihren Bedarf und erstellen in 24h eine kostenlose Offerte. Bei Bedarf vereinbaren wir eine Besichtigung."
   - num: "03"
     title: "Durchführung"
     text: "Zum vereinbarten Termin führen wir den Umzug sauber, pünktlich und abgestimmt aus."
@@ -124,12 +124,24 @@ testimonials:
   - text: "Sehr zufrieden mit dem Service und dem reibungslosen Ablauf."
     name: "Nicole P."
     role: "Privatkundin"
+  - text: "Die Offerte war schnell da, der Termin wurde eingehalten und das Team hat sauber gearbeitet."
+    name: "M. Keller"
+    role: "Privatkunde"
+    placeholder: true
+  - text: "Unser Büroumzug war gut koordiniert und wir konnten am neuen Standort rasch weiterarbeiten."
+    name: "Thomas B."
+    role: "Geschäftskunde"
+    placeholder: true
+  - text: "Freundliche Kommunikation, klare Absprachen und ein sehr ruhiger Ablauf am Umzugstag."
+    name: "Sabine M."
+    role: "Privatkundin"
+    placeholder: true
 
 values:
   - title: "Kundenzufriedenheit"
     text: "Wir arbeiten so, dass Sie sich vom ersten Kontakt bis zum Abschluss gut betreut fühlen."
   - title: "Transparente Preise"
-    text: "Sie erhalten nachvollziehbare Offerten ohne unnötige Überraschungen."
+    text: "Sie erhalten nachvollziehbare und klare Offerten ohne Überraschungen."
   - title: "Zuverlässigkeit"
     text: "Termine, Absprachen und Zuständigkeiten bleiben verbindlich."
 
@@ -142,7 +154,7 @@ footer:
 
 home:
   hero_eyebrow: "Umzüge in Bern, Basel und Zürich"
-  hero_title: "Ihr Umzug, unsere Mission."
+  hero_title: "Ihr Umzug, unser Handwerk."
   hero_text: "Privat- und Geschäftsumzüge mit transparenter Offerte, sauberer Planung und einem Team, das zuverlässig anpackt."
   hero_secondary_label: "Kontakt aufnehmen"
   hero_secondary_url: "/kontakt/"
@@ -150,10 +162,10 @@ home:
   hero_badge_text: "Persönliche Betreuung, klare Offerten und eingespielte Abläufe seit über 20 Jahren."
   services_eyebrow: "Unsere Leistungen"
   services_title: "Unsere Dienstleistungen rund um Ihren Umzug"
-  services_intro: "Von Privatumzug bis Lagerung: Wir unterstützen Sie mit Leistungen, die sich an Ihrem tatsächlichen Bedarf orientieren."
+  services_intro: "Von Privatumzug bis Lagerung: Leistungen, die sich an Ihrem Bedarf orientieren."
   process_eyebrow: "So läuft es ab"
   process_title: "Schritt für Schritt zum neuen Zuhause."
-  process_text: "So entsteht ein Umzug, der von Anfang an planbar bleibt."
+  process_text: "So entsteht ein Umzug, der von Anfang bis zum Ende planbar und übersichtlich ist."
   impressions_eyebrow: "Einblicke"
   impressions_title: "Echte Momente aus echten Umzügen."
   impressions_text: "Sorgfalt zeigt sich nicht in grossen Worten, sondern im täglichen Ablauf: beim Tragen, Sichern, Planen und Transportieren."
@@ -164,7 +176,7 @@ home:
   advantages_title: "Darauf können Sie sich bei jedem Umzug verlassen."
   regions_eyebrow: "Regionen"
   regions_title: "Für Umzüge in Bern, Basel und Zürich"
-  regions_text: "Wir betreuen Umzüge in Bern, Basel und Zürich sowie in den jeweiligen Regionen rundherum."
+  regions_text: "Wir betreuen Umzüge in Bern, Basel und Zürich sowie in den jeweiligen Regionen rundherum. Auf Anfrage auch in der ganzen Schweiz."
   testimonials_eyebrow: "Kundenstimmen"
   testimonials_title: "Das sagen unsere Kunden."
   faq_eyebrow: "Häufige Fragen"
