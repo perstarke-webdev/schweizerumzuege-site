@@ -204,6 +204,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
   scroll-behavior: smooth;
   text-rendering: optimizeLegibility;
 }
@@ -211,7 +212,7 @@ html {
 body {
   margin: 0;
   min-width: 320px;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-body);
@@ -1664,12 +1665,13 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 .testimonial-carousel__viewport {
   position: relative;
+  overflow: hidden;
   min-height: var(--testimonial-carousel-height, 18rem);
+  border-radius: var(--radius-xl);
   transition: min-height var(--duration-base) var(--ease-out);
 }
 .testimonial-carousel.is-sliding .testimonial-carousel__viewport {
   overflow: hidden;
-  border-radius: var(--radius-xl);
 }
 .testimonial {
   position: relative;
