@@ -633,9 +633,8 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 .site-header__brand img {
   width: auto;
-  height: 2.85rem;
+  height: 2.45rem;
   display: block;
-  mix-blend-mode: darken;
 }
 .site-header__brand:hover { opacity: 0.85; }
 
@@ -1476,13 +1475,59 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 .split__visual--square img {
   aspect-ratio: 1;
 }
+.home-about {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+.home-about__visual {
+  margin-top: clamp(2rem, 5vw, 4rem);
+}
+@media (min-width: 920px) {
+  .home-about {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      ". eyebrow"
+      "visual body";
+    column-gap: clamp(2rem, 5vw, 4rem);
+    row-gap: 1.25rem;
+    align-items: stretch;
+  }
+  .home-about__eyebrow {
+    grid-area: eyebrow;
+    align-self: end;
+    margin-bottom: 0;
+  }
+  .home-about__body {
+    grid-area: body;
+    min-width: 0;
+  }
+  .home-about__visual {
+    grid-area: visual;
+    position: relative;
+    min-height: 0;
+    margin-top: 0;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+  }
+  .home-about__visual img {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
 .split__values {
   display: grid;
   gap: 1rem;
   margin-top: 2rem;
 }
 .split__brand-mark {
-  width: min(18rem, 82vw);
+  width: min(12.625rem, 70vw);
   margin-bottom: 1.4rem;
 }
 .split__brand-mark img {
@@ -2868,7 +2913,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   }
 
   .site-header__brand img {
-    height: clamp(2.2rem, 8vw, 2.55rem);
+    height: clamp(1.9rem, 6.8vw, 2.2rem);
   }
 
   .site-header__toggle { display: inline-flex; }
