@@ -59,13 +59,19 @@ body_class: "contact-page"
       <article class="card contact-alt__card" data-reveal>
         <h3>{{ page_data.phone_title }}</h3>
         <p>{{ page_data.phone_text }}</p>
-        <a class="contact-alt__value" href="tel:{{ biz.phone_tel }}">{{ biz.phone }}</a>
+        <a class="contact-alt__value" href="tel:{{ biz.phone_tel }}">
+          <span class="contact-alt__icon" aria-hidden="true">{% include icon.html name="phone" size=18 %}</span>
+          <span>{{ biz.phone }}</span>
+        </a>
       </article>
 
       <article class="card contact-alt__card" data-reveal>
         <h3>{{ page_data.email_title }}</h3>
         <p>{{ page_data.email_text }}</p>
-        <a class="contact-alt__value" href="mailto:{{ biz.email }}">{{ biz.email }}</a>
+        <a class="contact-alt__value" href="mailto:{{ biz.email }}">
+          <span class="contact-alt__icon" aria-hidden="true">{% include icon.html name="mail" size=18 %}</span>
+          <span>{{ biz.email }}</span>
+        </a>
         <p class="muted">{{ biz.street }}, {{ biz.city }}</p>
       </article>
     </div>

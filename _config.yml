@@ -9,7 +9,7 @@ repository: "schweizerumzuege-site"
 timezone: Europe/Zurich
 logo: "/assets/images/logo.webp"
 og_image: "/assets/images/social/og-image.jpg"
-noindex_site: false
+noindex_site: true
 
 formspark_endpoint: "https://submit-form.com/qmOOtdX2O"
 

@@ -8,4 +8,5 @@ node_modules/
 Gemfile.lock
 .DS_Store
 .tmp-validation/
+test-results/
 briefing/

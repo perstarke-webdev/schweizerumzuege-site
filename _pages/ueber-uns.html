@@ -31,7 +31,7 @@ body_class: "about-page"
 </section>
 
 <section class="section section--about-intro">
-  <div class="site-shell site-shell--narrow">
+  <div class="site-shell">
     <div class="section__head section__head--center">
       <p class="eyebrow" data-reveal>Unsere Werte</p>
       <h2 data-reveal>{{ page_data.intro_title }}</h2>
@@ -182,4 +182,4 @@ body_class: "about-page"
   </div>
 </section>
 
-{% include closing-cta.html eyebrow=page_data.cta_eyebrow title=page_data.cta_title text=page_data.cta_text %}
+{% include closing-cta.html eyebrow=page_data.cta_eyebrow title=page_data.cta_title text=page_data.cta_text primary_label="Jetzt anfragen" %}

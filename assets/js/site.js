@@ -577,6 +577,7 @@
       const autoplayDelay = Number.parseInt(carousel.getAttribute('data-testimonial-autoplay') || '', 10);
       let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains('is-active')));
       let autoplayTimer = 0;
+      let transitionCleanupTimer = 0;
       let resizeQueued = false;
 
       if (!viewport || slides.length < 1) return;
@@ -600,22 +601,65 @@
         });
       };
 
-      const render = (index) => {
-        activeIndex = (index + slides.length) % slides.length;
-
-        slides.forEach((slide, slideIndex) => {
-          const isActive = slideIndex === activeIndex;
-          slide.classList.toggle('is-active', isActive);
-          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-        });
-
+      const updateDots = () => {
         dots.forEach((dot, dotIndex) => {
           const isActive = dotIndex === activeIndex;
           dot.classList.toggle('is-active', isActive);
           dot.setAttribute('aria-selected', isActive ? 'true' : 'false');
         });
+      };
 
+      const setSlideState = (index) => {
+        activeIndex = (index + slides.length) % slides.length;
+        carousel.classList.remove('is-sliding');
+
+        slides.forEach((slide, slideIndex) => {
+          const isActive = slideIndex === activeIndex;
+          slide.classList.remove('is-exiting');
+          slide.classList.toggle('is-active', isActive);
+          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+
+        updateDots();
         queueHeightSync();
+      };
+
+      const render = (index, direction = 1) => {
+        const nextIndex = (index + slides.length) % slides.length;
+
+        carousel.classList.toggle('is-backward', direction < 0);
+
+        if (nextIndex === activeIndex || prefersReducedMotion) {
+          setSlideState(nextIndex);
+          return;
+        }
+
+        const previousSlide = slides[activeIndex];
+        const nextSlide = slides[nextIndex];
+
+        window.clearTimeout(transitionCleanupTimer);
+        carousel.classList.add('is-sliding');
+
+        slides.forEach((slide) => {
+          if (slide !== previousSlide) slide.classList.remove('is-exiting');
+        });
+
+        previousSlide?.classList.remove('is-active');
+        previousSlide?.classList.add('is-exiting');
+        previousSlide?.setAttribute('aria-hidden', 'true');
+
+        activeIndex = nextIndex;
+        nextSlide?.classList.remove('is-exiting');
+        nextSlide?.classList.add('is-active');
+        nextSlide?.setAttribute('aria-hidden', 'false');
+
+        updateDots();
+        queueHeightSync();
+
+        transitionCleanupTimer = window.setTimeout(() => {
+          previousSlide?.classList.remove('is-exiting');
+          carousel.classList.remove('is-sliding');
+        }, 430);
       };
 
       const stopAutoplay = () => {
@@ -629,21 +673,26 @@
 
         stopAutoplay();
         autoplayTimer = window.setInterval(() => {
-          render(activeIndex + 1);
+          render(activeIndex + 1, 1);
         }, autoplayDelay);
       };
 
+      const renderFromUserInput = (index, direction) => {
+        render(index, direction);
+      };
+
       prevButton?.addEventListener('click', () => {
-        render(activeIndex - 1);
+        renderFromUserInput(activeIndex - 1, -1);
       });
 
       nextButton?.addEventListener('click', () => {
-        render(activeIndex + 1);
+        renderFromUserInput(activeIndex + 1, 1);
       });
 
       dots.forEach((dot) => {
         dot.addEventListener('click', () => {
-          render(Number.parseInt(dot.getAttribute('data-testimonial-dot') || '0', 10));
+          const nextIndex = Number.parseInt(dot.getAttribute('data-testimonial-dot') || '0', 10);
+          renderFromUserInput(nextIndex, nextIndex >= activeIndex ? 1 : -1);
         });
       });
 
@@ -657,7 +706,7 @@
         document.fonts.ready.then(queueHeightSync);
       }
 
-      render(activeIndex);
+      setSlideState(activeIndex);
       queueHeightSync();
       startAutoplay();
     });

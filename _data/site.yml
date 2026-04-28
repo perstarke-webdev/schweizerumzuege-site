@@ -49,7 +49,7 @@ services:
     cta_label: "Offerte für Geschäftsumzug anfragen"
     image: "/assets/images/services/business.webp"
   - slug: "reinigung"
-    icon: "spray"
+    icon: "vacuum"
     title: "Reinigung"
     short: "Umzugsreinigung, abgestimmt auf Termin und Objekt."
     long: "Wenn Reinigung und Umzug zusammenlaufen, sparen Sie zusätzlichen Abstimmungsaufwand. Wir koordinieren die Reinigung passend zu Ihrem Termin und Ihrem Objekt."
@@ -101,13 +101,13 @@ process:
 
 advantages:
   - title: "Erfahren"
-    text: "Seit vielen Jahren im Umzugsbereich tätig."
+    text: "Seit mehr als 20 Jahren im Umzugsbereich tätig."
   - title: "Strukturiert"
-    text: "Klare Ansprechpartner und nachvollziehbare Abläufe."
+    text: "Klare Ansprechpartner und strukturierte Abläufe."
   - title: "Transparent"
-    text: "Offerten ohne unnötige Überraschungen."
+    text: "Nachvollziehbare Offerten ohne Überraschungen."
   - title: "Flexibel"
-    text: "Leistungen passend zu Objekt, Termin und Bedarf."
+    text: "Leistungen angepasst auf Objekte, Termin und Bedarf."
 
 regions:
   - name: "Bern"
@@ -139,7 +139,7 @@ testimonials:
 
 values:
   - title: "Kundenzufriedenheit"
-    text: "Wir arbeiten so, dass Sie sich vom ersten Kontakt bis zum Abschluss gut betreut fühlen."
+    text: "Wir arbeiten so, dass Sie vom ersten Kontakt bis zum Abschluss optimal betreut sind."
   - title: "Transparente Preise"
     text: "Sie erhalten nachvollziehbare und klare Offerten ohne Überraschungen."
   - title: "Zuverlässigkeit"
@@ -192,7 +192,7 @@ services_page:
   hero_title: "Unsere Leistungen rund um Ihren Umzug"
   hero_text: "Ob Wohnung, Büro, Reinigung oder Lagerung: Wir stellen die Leistungen so zusammen, wie Ihr Umzug sie braucht."
   overview_title: "Alles aus einer Hand für Ihren Umzug"
-  overview_intro: "Sie können einzelne Leistungen buchen oder mehrere Services sinnvoll miteinander kombinieren."
+  overview_intro: "Sie können einzelne Leistungen beanspruchen oder auch problemlos mehrere Services sinnvoll miteinander kombinieren."
   process_title: "So läuft Ihr Umzug ab"
   flex_title: "Leistungen passend zu Ihrem Umzug"
   flex_text: "Nicht jeder Umzug braucht dasselbe. Deshalb stellen wir Umfang und Unterstützung nach Objekt, Termin und Aufwand zusammen."
@@ -213,7 +213,7 @@ services_page:
 about_page:
   hero_eyebrow: "Über uns"
   hero_title: "Ein verlässlicher Partner für Ihren Umzug"
-  hero_text: "Schweizer Umzüge steht für verlässliche Planung, transparente Offerten und eine Durchführung, auf die Sie sich verlassen können."
+  hero_text: "Schweizer Umzüge steht, wie es der Name schon sagt, für Umzüge mit Schweizer Qualität: Verlässliche Planung, transparente Offerten und eine Durchführung, auf die Sie sich verlassen können."
   intro_title: "Was Schweizer Umzüge ausmacht"
   intro_text: "Wir wollen Umzüge für Privatpersonen und Unternehmen planbar machen. Dafür setzen wir auf klare Kommunikation, saubere Organisation und Lösungen, die zum tatsächlichen Bedarf passen."
   mission_title: "Unser Anspruch"
@@ -240,8 +240,8 @@ about_page:
 contact_page:
   hero_eyebrow: "Offerte anfragen"
   hero_title: "Kostenlose und unverbindliche Offerte für Ihren Umzug"
-  hero_text: "Senden Sie uns die wichtigsten Eckdaten. Wir melden uns mit einer ersten Einschätzung und klären offene Fragen direkt mit Ihnen."
-  hero_note: "Meist innerhalb von 24 Stunden"
+  hero_text: "Senden Sie uns einfach die wichtigsten Eckdaten. Wir melden uns mit einer transparenten Offerte und klären offene Fragen direkt mit Ihnen."
+  hero_note: "Offerte innerhalb 24 Stunden"
   form_title: "Ihre Anfrage in wenigen Minuten"
   form_text: "Name und E-Mail reichen für den Start. Je mehr Sie angeben, desto genauer fällt unsere erste Einschätzung aus."
   trust_title: "Warum Kunden uns vertrauen"
@@ -272,7 +272,7 @@ home_faq:
   - question: "Bieten Sie auch Lagerung für Möbel an?"
     answer: "Ja. Für Möbel und Gegenstände stehen Lagerflächen mit rund 50 000 m² zur Verfügung, kurz- oder langfristig."
   - question: "Wie schnell erhalte ich eine Offerte?"
-    answer: "In der Regel innerhalb von 24 Stunden. Wenn mehr Details nötig sind, vereinbaren wir eine Besichtigung und erstellen die Offerte auf dieser Basis."
+    answer: "Sie erhalten Ihre Offerte innerhalb von 24 Stunden. Falls wir noch Details brauchen, klären wir diese direkt mit Ihnen."
 
 services_faq:
   - question: "Welche Leistungen kann ich kombinieren?"
@@ -286,7 +286,7 @@ services_faq:
 
 contact_faq:
   - question: "Wie schnell erhalte ich eine Offerte?"
-    answer: "Meist innerhalb von 24 Stunden. Bei komplexeren Umzügen kann es etwas länger dauern, wenn wir zuerst Rückfragen klären."
+    answer: "Sie erhalten Ihre Offerte innerhalb von 24 Stunden. Falls wir noch Details brauchen, klären wir diese direkt mit Ihnen."
   - question: "Ist die Offerte wirklich unverbindlich?"
     answer: "Ja. Die Anfrage ist kostenlos und verpflichtet Sie zu nichts."
   - question: "Muss ich alles genau angeben?"
