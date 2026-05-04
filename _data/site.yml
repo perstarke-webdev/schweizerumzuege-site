@@ -75,6 +75,15 @@ services:
     bullets: ["Kurz- und langfristig möglich", "Sichere Unterbringung", "Einfach in den Umzug integrierbar"]
     cta_label: "Lagerung anfragen"
     image: "/assets/images/services/storage.webp"
+  - slug: "moebelmontage"
+    icon: "tools"
+    title: "Möbelmontage"
+    short: "Fachgerechte Montage und Demontage von Möbeln rund um Ihren Umzug."
+    long: "Wir demontieren Möbel sorgfältig, transportieren sie sicher und bauen sie am Zielort wieder fachgerecht auf. So bleibt der Ablauf für Sie übersichtlich und planbar."
+    detail: "Montagearbeiten, sauber abgestimmt auf Transport und Termin."
+    bullets: ["Demontage vor dem Transport", "Fachgerechter Wiederaufbau", "Abstimmung mit Umzug und Termin"]
+    cta_label: "Möbelmontage anfragen"
+    image: "/assets/images/services/moebelmontage.webp"
   - slug: "umzugsplanung"
     icon: "clipboard"
     title: "Umzugsplanung"

@@ -82,7 +82,7 @@ body_class: "home-page"
       </div>
     </div>
 
-    <div class="services-grid">
+    <div class="services-grid services-grid--services">
       {% for service in meta.services %}
         <a class="card services-grid__item card--link" href="{{ '/dienstleistungen/#' | append: service.slug | relative_url }}" data-reveal aria-label="{{ service.title }} ansehen">
           <span class="card__icon">{% include icon.html name=service.icon size=20 %}</span>
@@ -192,7 +192,7 @@ body_class: "home-page"
 
     <div class="home-about__body">
       <div class="split__brand-mark" data-reveal>
-        <img src="{{ '/assets/images/logo-transparent.png' | relative_url }}" alt="Schweizer Umzüge" width="202" height="79" loading="lazy" decoding="async">
+        <img src="{{ '/assets/images/logo-phone-transparent.png' | relative_url }}" alt="Schweizer Umzüge" width="1200" height="668" loading="lazy" decoding="async">
       </div>
       <h2 data-reveal>{{ home.about_title }}</h2>
       <p class="lead" data-reveal>{{ home.about_text }}</p>

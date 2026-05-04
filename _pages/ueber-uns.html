@@ -40,7 +40,7 @@ body_class: "about-page"
   </div>
 </section>
 
-<section class="section section--paper-soft">
+<section class="section section--paper-soft section--mission">
   <div class="site-shell split">
     <div>
       <p class="eyebrow" data-reveal>Haltung</p>
@@ -56,6 +56,26 @@ body_class: "about-page"
 
     <div class="split__visual split__visual--square" data-reveal>
       <img src="{{ '/assets/images/services/private.webp' | relative_url }}" alt="Vorbereiteter Umzugswagen mit sauber gestapelten Kartons." width="1024" height="682" loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper-soft section--director">
+  <div class="site-shell split split--left-img split--owner">
+    <div>
+      <p class="eyebrow" data-reveal>Unser Geschäftsführer</p>
+      <h2 data-reveal>Sedat Krasniqi</h2>
+      <p class="lead" data-reveal>Sedat Krasniqi verbindet persönliche Beratung mit klar organisierten Abläufen. So bleiben Fragen, Termine und Zuständigkeiten vom ersten Kontakt bis zum Umzugstag verbindlich.</p>
+      <div class="split__cta" data-reveal>
+        <a class="button button--primary" href="{{ meta.cta.primary_url | relative_url }}">
+          Offerte persönlich anfragen
+          <span class="button__arrow" aria-hidden="true">{% include icon.html name="arrow-right" size=16 %}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="split__visual split__visual--square" data-reveal>
+      <img src="{{ '/assets/images/about/sedat-krasniqi.webp' | relative_url }}" alt="Sedat Krasniqi, Geschäftsführer von Schweizer Umzüge." width="1100" height="1100" loading="lazy" decoding="async">
     </div>
   </div>
 </section>

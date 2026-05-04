@@ -637,7 +637,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 .site-header__brand img {
   width: auto;
-  height: 2.45rem;
+  height: 3.6rem;
   display: block;
 }
 .site-header__brand:hover { opacity: 0.85; }
@@ -1040,7 +1040,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 
 /* =============================================================
-   Services grid (6 cards)
+   Services grid
    ============================================================= */
 .services-grid {
   display: grid;
@@ -1052,6 +1052,17 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 @media (min-width: 960px) {
   .services-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+}
+@media (min-width: 620px) {
+  .services-grid--services {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .services-grid--services > .services-grid__item {
+    grid-column: span 3;
+  }
+  .services-grid--services > .services-grid__item:nth-child(n + 5) {
+    grid-column: span 2;
+  }
 }
 .services-grid__item {
   --service-accent: var(--color-red);
@@ -1544,12 +1555,30 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   margin-top: 2rem;
 }
 .split__brand-mark {
-  width: min(12.625rem, 70vw);
+  width: min(14rem, 70vw);
+  margin-left: -0.45rem;
   margin-bottom: 1.4rem;
 }
 .split__brand-mark img {
   width: 100%;
   height: auto;
+}
+.split--owner {
+  align-items: center;
+}
+.section--mission {
+  padding-bottom: calc(clamp(3.5rem, 8vw, 6rem) / 2);
+}
+.section--director {
+  padding-top: calc(clamp(3.5rem, 8vw, 6rem) / 2);
+}
+@media (min-width: 760px) {
+  .split--owner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .split--owner.split--left-img .split__visual {
+    order: -1;
+  }
 }
 .split__cta {
   margin-top: 1.5rem;
@@ -2553,8 +2582,9 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
 }
 .site-footer__brand .site-footer__logo { display: inline-flex; margin-bottom: 1.25rem; }
 .site-footer__brand img {
-  height: 3.2rem;
+  height: 4.8rem;
   width: auto;
+  border-radius: 0.36rem;
   filter: brightness(1.05);
 }
 .site-footer__tagline { color: var(--color-surface-68); max-width: 28rem; font-size: 0.95rem; line-height: 1.55; }
@@ -3032,7 +3062,7 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   }
 
   .site-header__brand img {
-    height: clamp(1.9rem, 6.8vw, 2.2rem);
+    height: 3.1rem;
   }
 
   .site-header__toggle { display: inline-flex; }

@@ -39,7 +39,7 @@ body_class: "services-page"
       </div>
     </div>
 
-    <div class="services-grid">
+    <div class="services-grid services-grid--services">
       {% for service in meta.services %}
         <a class="card services-grid__item card--link" href="#{{ service.slug }}" data-reveal aria-label="{{ service.title }} ansehen">
           <span class="card__icon">{% include icon.html name=service.icon size=20 %}</span>
