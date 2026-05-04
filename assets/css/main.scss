@@ -1083,6 +1083,21 @@ h4 { font-size: 1.125rem; letter-spacing: -0.01em; font-weight: 600; }
   --service-accent-deep: color-mix(in srgb, var(--color-clay-deep) 74%, var(--color-ink) 26%);
   --service-accent-soft: var(--color-gold-soft);
 }
+.services-grid--services > .services-grid__item:nth-child(-n + 2) {
+  --service-accent: var(--color-red);
+  --service-accent-deep: var(--color-red-deep);
+  --service-accent-soft: var(--color-red-soft);
+}
+.services-grid--services > .services-grid__item:nth-child(n + 3):nth-child(-n + 4) {
+  --service-accent: oklch(0.75 0.135 50);
+  --service-accent-deep: oklch(0.57 0.115 42);
+  --service-accent-soft: oklch(0.958 0.052 54);
+}
+.services-grid--services > .services-grid__item:nth-child(n + 5) {
+  --service-accent: var(--color-gold);
+  --service-accent-deep: color-mix(in srgb, var(--color-clay-deep) 74%, var(--color-ink) 26%);
+  --service-accent-soft: var(--color-gold-soft);
+}
 .services-grid__item .card__icon {
   background: var(--service-accent-soft);
   color: var(--service-accent-deep);
