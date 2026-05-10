@@ -1,3 +1,1 @@
-# Schweizer Umzüge
-
-Jekyll website draft for Schweizer Umzüge. 
+[# Schweizer Umzüge](https://schweizerumzuege.ch/)
