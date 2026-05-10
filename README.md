@@ -1,1 +1,1 @@
-[# Schweizer Umzüge](https://schweizerumzuege.ch/)
+[Schweizer Umzüge](https://schweizerumzuege.ch/)
