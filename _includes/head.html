@@ -79,6 +79,42 @@
     };
   })();
 </script>
+{% if site.google_analytics_id %}
+<script>
+  (function () {
+    var tagId = {{ site.google_analytics_id | jsonify }};
+    var isLoaded = false;
+
+    function loadAnalytics() {
+      if (isLoaded || !tagId) return;
+      isLoaded = true;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function () {
+        window.dataLayer.push(arguments);
+      };
+
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(tagId);
+      document.head.appendChild(script);
+
+      window.gtag('js', new Date());
+      window.gtag('config', tagId, { anonymize_ip: true });
+    }
+
+    if (window.siteConsent && window.siteConsent.canUse('analytics')) {
+      loadAnalytics();
+    }
+
+    window.addEventListener('site:cookie-consent-change', function (event) {
+      if (event.detail && event.detail.analytics) {
+        loadAnalytics();
+      }
+    });
+  })();
+</script>
+{% endif %}
 <link rel="preload" href="{{ '/assets/fonts/archivo-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 {% if page.body_class == 'home-page' or page.body_class == 'about-page' %}
   <link

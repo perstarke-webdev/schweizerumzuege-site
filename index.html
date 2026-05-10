@@ -272,9 +272,6 @@ body_class: "home-page"
       <div class="testimonial-carousel__viewport">
       {% for item in meta.testimonials %}
         <article class="testimonial testimonial-slide{% if forloop.first %} is-active{% endif %}" data-testimonial-slide aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}">
-          {% if item.placeholder %}
-            <span class="testimonial__placeholder">Platzhalter</span>
-          {% endif %}
           <span class="testimonial__stars" aria-hidden="true">
             {% for i in (1..5) %}
               <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8L12 3.6Z"/></svg>

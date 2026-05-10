@@ -28,6 +28,6 @@ The site is then available at [http://localhost:4000](http://localhost:4000).
 
 ## Notes
 
-- The repository currently runs with `noindex` enabled via [`_config.yml`](./_config.yml) for draft/review use.
+- The repository is configured for launch with indexable pages via [`_config.yml`](./_config.yml).
 - The contact and offer form submits to the configured Formspark endpoint in [`_config.yml`](./_config.yml).
 - Source briefing assets are intentionally not referenced directly by the built site. Required assets were copied into production paths under [`/assets`](./assets).

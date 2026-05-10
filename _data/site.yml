@@ -127,24 +127,18 @@ regions:
     text: "Umzugsservice in und rund um Zürich"
 
 testimonials:
-  - text: "Rasche Rückmeldung, speditiv, pünktlich, freundlich, sehr zu empfehlen."
+  - text: "Rasche Rückmeldung, speditiv, pünktlich, freundlich - sehr zu empfehlen."
     name: "Nicole Rohrer"
-    role: "Privatkundin"
-  - text: "Sehr zufrieden mit dem Service und dem reibungslosen Ablauf."
+    role: "Google-Bewertung"
+  - text: "Sie waren pünktlich, gut organisiert und sehr speditiv. Alles hatte jeweils bestens geklappt."
     name: "Nicole P."
-    role: "Privatkundin"
-  - text: "Die Offerte war schnell da, der Termin wurde eingehalten und das Team hat sauber gearbeitet."
-    name: "M. Keller"
-    role: "Privatkunde"
-    placeholder: true
-  - text: "Unser Büroumzug war gut koordiniert und wir konnten am neuen Standort rasch weiterarbeiten."
-    name: "Thomas B."
-    role: "Geschäftskunde"
-    placeholder: true
-  - text: "Freundliche Kommunikation, klare Absprachen und ein sehr ruhiger Ablauf am Umzugstag."
-    name: "Sabine M."
-    role: "Privatkundin"
-    placeholder: true
+    role: "Google-Bewertung"
+  - text: "Die Jungs sind super zuverlässig und helfen wo sie nur können!"
+    name: "Salina Epper"
+    role: "Google-Bewertung"
+  - text: "So wurde mein Umzug in Rekordzeit durchgeführt. 1a, Danke!"
+    name: "Lucas Jansen"
+    role: "Google-Bewertung"
 
 values:
   - title: "Kundenzufriedenheit"

@@ -2,16 +2,17 @@ locale: "de-CH"
 lang: "de-CH"
 title: "Schweizer Umzüge"
 description: "Umzugsunternehmen für Privat- und Geschäftsumzüge in Bern, Basel und Zürich. Transparente Offerten, saubere Planung und persönliche Betreuung."
-url: "https://schweizerumzuege.kswd-draft.ch"
-production_url: "https://schweizerumzuege.kswd-draft.ch"
+url: "https://schweizerumzuege.ch"
+production_url: "https://schweizerumzuege.ch"
 baseurl: ""
 repository: "schweizerumzuege-site"
 timezone: Europe/Zurich
 logo: "/assets/images/logo.webp"
 og_image: "/assets/images/social/og-image.jpg"
-noindex_site: true
+noindex_site: false
 
-formspark_endpoint: "https://submit-form.com/qmOOtdX2O"
+formspark_endpoint: "https://submit-form.com/84VAMgSht"
+google_analytics_id: "G-DV8VS29C7F"
 
 include:
   - _pages
@@ -25,6 +26,8 @@ exclude:
   - .bundle
   - vendor
   - node_modules
+  - README.md
+  - Gemfile
   - Gemfile.lock
   - .tmp-validation
   - docker-compose.yml
